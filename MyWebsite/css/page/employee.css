@@ -1,1 +1,24 @@
-﻿
+﻿.grid {
+    margin: 0px 16px;
+    margin-top: 16px;
+    box-sizing: border-box;
+    height: calc(100vh - 230px);
+    overflow: scroll;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    
+}
+table th,td{
+    border-bottom: 1px solid #bbbbbb;
+    padding: 10px;
+    height: 48px;
+    text-align: left;
+}
+table th{
+    padding-top: 0px;
+}
+td:hover tr{
+    background-color: #bbbbbb;
+}

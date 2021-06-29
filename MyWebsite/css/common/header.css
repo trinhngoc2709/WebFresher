@@ -5,12 +5,17 @@
     position: relative;
     border-bottom: 1px solid #e5e5e5;
 }
-
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('../../font/GoogleSans-Bold.otf') format('opentype');
+}
 .header select{
     top: 18px;
     left: 16px;
     border: none;
     position: absolute;
+    font-family: GoogleSans-Bold;
+    font-size: 15px;
 }
 .header .account-info{
     display: flex;
