@@ -10,3 +10,6 @@
     width: 300px;
     margin-right: 10px;
 }
+.input-search:focus{
+    border-color: #019160;
+}

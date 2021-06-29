@@ -16,6 +16,8 @@
     position: absolute;
     font-family: GoogleSans-Bold;
     font-size: 15px;
+    outline: none;
+    padding-right: 12px;
 }
 .header .account-info{
     display: flex;

@@ -3,8 +3,8 @@
     margin: 0;
     font-family: GoogleSans-Regular;
     font-size: 13px;
-
 }
+
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');

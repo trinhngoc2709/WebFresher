@@ -1,0 +1,36 @@
+.layout-blur{
+    position: relative;
+    background-color: #808080;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.5;
+}
+.employee-detail {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 731px;
+    height: 780px;
+    background-color: #ffffff;
+}
+.employee-detail .close-button{
+    width: 20px;
+    height: 20px;
+    padding: 10px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+.employee-detail .close-button:hover{
+    background-color: #e5e5e5;
+}
+.employee-detail .title{
+    padding: 24px 24px;
+    font-family: GoogleSans-Bold;
+    font-size: 15px;
+}
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('../../font/GoogleSans-Bold.otf') format('opentype');
+}

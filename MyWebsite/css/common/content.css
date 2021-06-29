@@ -5,7 +5,7 @@
     left: 221px;
     width: calc(100% - 221px);
     height: calc(100vh - 61px);
-    background-color: #ffffff;
+   
 }
 /* Page title*/
 .content .content-header{
@@ -30,22 +30,53 @@
             padding-left: 16px;
         }
             .content .filter-bar .filter-select{
-                padding: 10.5px 16px;
+                padding: 10.5px 12px;
                 border: 1px solid #bbbbbb;
                 border-radius: 4px;
                 outline: none;
                 margin-right: 16px;
-
             }
 /* Paging Bar */
 .content .paging-bar{
     height: 56px;
     margin: 0px 16px;
+    position: relative;
     display: flex;
-}
-.content .paging-bar .max-employee{
-   
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e9ebee;
 }
 .content .paging-bar .display-employee{
+    margin-left: 16px;
+}
+.content .paging-bar .max-employee{
+    margin-right: 16px;
+}
+.content .paging-bar div{
+    float: right;
+}
+.content .paging-bar .paging{
+    display: flex;
     
+}
+.content .paging-bar .paging img{
+    padding: 5px;
+}
+.content .paging-bar .paging img:hover{
+    background-color: #ffffff;
+    border-radius: 4px;
+}
+.content .paging-bar .paging .paging-number{
+    text-align: center;
+    align-self: center;
+    padding: 5px;
+    border: 1px solid #bbbbbb;
+    border-radius: 50% 50%;
+    height: 16px;
+    width: 16px;
+    margin: 0px 5px;
+}
+.content .paging-bar .paging .paging-number:first-of-type{
+    background-color: #019160 ;
+    color: #ffffff;
 }
