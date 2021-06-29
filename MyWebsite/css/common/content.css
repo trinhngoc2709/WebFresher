@@ -1,0 +1,24 @@
+﻿.content{
+    position: absolute;
+    top: 61px;
+    left: 221px;
+    width: calc(100% - 221px);
+    height: calc(100vh - 61px);
+    background-color: #ffffff;
+}
+/* Page title*/
+.content .page-title{
+
+}
+/* Filter bar*/
+.content .filter-bar{
+
+}
+/* Grid */
+.content .grid{
+
+}
+/* Paging Bar */
+.content paging-bar{
+
+}
