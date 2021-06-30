@@ -1,4 +1,5 @@
-.layout-blur{
+.layout-blur {
+    display: none;
     position: relative;
     background-color: #808080;
     width: 100vw;
@@ -6,31 +7,126 @@
     opacity: 0.5;
 }
 .employee-detail {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 731px;
-    height: 780px;
+    width: 900px;
+    height: 870px;
     background-color: #ffffff;
 }
-.employee-detail .close-button{
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-}
-.employee-detail .close-button:hover{
-    background-color: #e5e5e5;
-}
-.employee-detail .title{
-    padding: 24px 24px;
-    font-family: GoogleSans-Bold;
-    font-size: 15px;
+    .employee-detail .close-button{
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+    .employee-detail .close-button:hover{
+        background-color: #e5e5e5;
+    }
+    .employee-detail .title{
+        padding: 24px 24px;
+        font-family: GoogleSans-Bold;
+        font-size: 20px;
+    }
+    .employee-detail .footer {
+        position: absolute;
+        width: 100%;
+        background-color: #e9ebee;
+        height: calc(100% - 744px - 73px);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+        .employee-detail .footer .cancel {
+            width: 80px;
+            cursor: pointer;
+        }
+        .employee-detail .footer button {
+            color: #ffffff;
+            background-color: #019160;
+            margin-right: 39px;
+            padding-left: 40px;
+            padding-right: 16px;
+            background-image: url('../../icon/floppy-disk.png');
+            background-repeat: no-repeat;
+            background-size: 12px;
+            background-position: 16px center;
+            width: 80px;
+            height: 40px;
+            outline: none;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    .employee-detail .employee-detail-content{
+        display: flex;
+    }
+        .employee-detail .employee-detail-content .image-upload {
+            padding-left: 24px;
+            padding-top: 32px;
+        }
+            .employee-detail .employee-detail-content .image-upload .note{
+                display: block;
+                text-align: center;
+                max-width: 200px;
+            }
+            .employee-detail .employee-detail-content .image-upload #upload-img {
+                width: 200px;
+                height: 200px;
+                border-radius: 50% 50%;
+                border: 1px solid #bbbbbb;
+            }
+        .employee-detail .employee-detail-content .input-image {
+            display: none;
+        }
+        .employee-detail .employee-detail-content .employee-information{
+            padding: 16px;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+            .employee-detail .employee-detail-content .employee-information .sub-title{
+                position: relative;
+                padding-bottom: 10px;
+            }
+            .employee-detail .employee-detail-content .employee-information .sub-title:nth-of-type(1) {
+                margin: 16px 0px;
+            }
+                .employee-detail .employee-detail-content .employee-information .sub-title:before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    height: 1px;
+                    width: 85px;
+                    border-bottom: 4px solid #019160;
+                }
+            .employee-detail .employee-detail-content .employee-information .input-information{
+                display: inline-block;
+                flex-direction: column;
+                font-family: GoogleSans-Regular;
+                margin: 5px 10px 5px 0px;
+                position: relative;
+            }
+                .employee-detail .employee-detail-content .employee-information .input-information .name-information{
+                    display: block;
+                    margin-bottom: 5px;
+                }
+                .employee-detail .employee-detail-content .employee-information .input-information input{
+                    width: 270px;
+                }
+.block{
+    display: block !important;
 }
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');
+}
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../../font/GoogleSans-Regular.otf') format('opentype');
 }

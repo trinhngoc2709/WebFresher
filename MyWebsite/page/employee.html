@@ -14,6 +14,7 @@
     <link href="../css/common/toolbar.css" rel="stylesheet" />
     <link href="../css/common/input.css" rel="stylesheet" />
     <link href="../css/common/grid.css" rel="stylesheet" />
+    <link href="../css/common/title.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
@@ -276,6 +277,118 @@
     <div class="employee-detail">
         <div class="title">THÔNG TIN NHÂN VIÊN</div>
         <img class="close-button" src="/icon/x.svg" alt="">
+        <div class="employee-detail-content">
+            <div class="image-upload">
+                <input class="input-image" type="file" />
+                <img id="upload-img" src="/img/default-avatar.jpg" alt="your image" />
+                <div class="note">Vui lòng chọn ảnh có định <br /> dạng <br />.jpg, .jpeg, .png, .gif.)</div>
+            </div>
+            <div class="employee-information">
+                <div class="general-information">
+                    <div class="sub-title">A. THÔNG TIN CHUNG:</div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Mã nhân viên (<span style="color: red;"> *  </span>)
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Họ và tên (<span style="color: red;"> *  </span>)
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Ngày sinh
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Giới tính
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Số CMTND/ Căn cước (<span style="color: red;"> *  </span>)
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Ngày cấp
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information block">
+                        <div class="name-information">
+                            Nơi cấp
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Email (<span style="color: red;"> *  </span>)
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Số điện thoại (<span style="color: red;"> *  </span>)
+                        </div>
+                        <input type="text" />
+                    </div>
+                </div>
+                <div class="work-information">
+                    <div class="sub-title">B. THÔNG TIN CÔNG VIỆC:</div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Vị trí
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Phòng ban
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Mã số thuế cá nhân
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Mức lương cơ bản
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                           Ngày gia nhập công ty
+                        </div>
+                        <input type="text" />
+                    </div>
+                    <div class="input-information">
+                        <div class="name-information">
+                            Tình trạng công việc
+                        </div>
+                        <input type="text" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer">
+            <div class="cancel">Hủy</div>
+            <button>
+                Lưu
+            </button>
+        </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/common.js"></script>
