@@ -5,6 +5,11 @@
     border-radius: 4px;
     height: 40px;
 }
+input[type=text]:disabled {
+    background: #ffffff;
+    font-family: GoogleSans-Regular;
+    color: rgb(49, 47, 47);
+}
 .input-search {
     padding: 0px 16px;
     padding-left: 40px;
@@ -13,4 +18,8 @@
 }
 .input-search:focus{
     border-color: #019160;
+}
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../../font/GoogleSans-Regular.otf') format('opentype');
 }

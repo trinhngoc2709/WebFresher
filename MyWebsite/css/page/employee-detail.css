@@ -1,20 +1,24 @@
 .layout-blur {
-    display: none;
+    display: block;
     position: relative;
     background-color: #808080;
-    width: 100vw;
+    width: 0vw;
     height: 100vh;
     opacity: 0.5;
+    transition: all 0.3s ease-out;
 }
 .employee-detail {
-    display: none;
+    display: block;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 900px;
+    width: 0px;
     height: 870px;
     background-color: #ffffff;
+    transition: all 0.3s ease-out;
+    overflow: hidden;
+    
 }
     .employee-detail .close-button{
         width: 20px;
@@ -96,15 +100,15 @@
             .employee-detail .employee-detail-content .employee-information .sub-title:nth-of-type(1) {
                 margin: 16px 0px;
             }
-                .employee-detail .employee-detail-content .employee-information .sub-title:before {
-                    content: "";
-                    position: absolute;
-                    left: 0;
-                    bottom: 0;
-                    height: 1px;
-                    width: 85px;
-                    border-bottom: 4px solid #019160;
-                }
+            .employee-detail .employee-detail-content .employee-information .sub-title:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                height: 1px;
+                width: 85px;
+                border-bottom: 4px solid #019160;
+            }    
             .employee-detail .employee-detail-content .employee-information .input-information{
                 display: inline-block;
                 flex-direction: column;
@@ -119,6 +123,17 @@
                 .employee-detail .employee-detail-content .employee-information .input-information input{
                     width: 270px;
                 }
+                .employee-detail .employee-detail-content .employee-information .input-information .input-field{
+                    position: relative;
+                }
+                .employee-detail .employee-detail-content .employee-information .input-information .icon-input{
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    right: 0px;
+                    top: 14.31px;
+                }
+
 .block{
     display: block !important;
 }
