@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+        background-color: #bbbbbb;
+        font-family: GoogleSans-Regular;
+    }
+
+    @font-face {
+        font-family: 'GoogleSans-Regular';
+        src: url('../../font/GoogleSans-Regular.otf') format('opentype');
+    }
+
+    .popup-warning {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: 191px;
+        background-color: #ffffff;
+        border-radius: 4px;
+    }
+
+        .popup-warning .close-button {
+            width: 20px;
+            height: 20px;
+            padding: 10px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+
+            .popup-warning .close-button:hover {
+                background-color: #e5e5e5;
+            }
+
+    .popup-title {
+        font-size: 15px;
+        color: #000000;
+        font-weight: bold;
+        margin: 24px;
+    }
+
+    .popup-content {
+        margin: 24px;
+        margin-top: 0px;
+        display: flex;
+        font-size: 13px;
+    }
+
+    .icon-error {
+        background-image: url('../../icon/error.png');
+        width: 40px;
+        height: 40px;
+        border-radius: 50% 50%;
+        background-size: 20px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        margin-right: 10px;
+    }
+
+    .popup-footer {
+        height: 60px;
+        padding-right: 24px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: #f4f4f4;
+    }
+
+        .popup-footer button {
+            height: 40px;
+            margin: 10px 16px;
+            margin-right: 0px;
+            border: none;
+            border-radius: 4px;
+        }
+
+            .popup-footer button:last-of-type {
+                background-color: #f65454;
+                width: 100px;
+                color: #ffffff;
+            }
+
+            .popup-footer button:first-of-type {
+                width: 100px;
+                background-color: #f4f4f4;
+                font-size: 13px;
+            }
+
+                .popup-footer button:first-of-type:hover {
+                    background-color: #e5e5e5;
+                }
+
+</style>
+<body>
+    <div class="popup-warning">
+        <div class="popup-title">Đóng form thông tin nhân viên</div>
+        <img id="btn-close" class="close-button" src="/icon/x.svg" alt="">
+        <div class="popup-content">
+            <div class="icon-error"></div>
+            <div class="content-warning">Bạn có thực sự muốn đóng form nhập <b>"Thông tin của<br />nhân viên"</b> hay không?</div>
+        </div>
+        <div class="popup-footer">
+            <button>Hủy</button>
+            <button>
+                Xóa
+            </button>
+        </div>
+    </div>
+</body>
+</html>

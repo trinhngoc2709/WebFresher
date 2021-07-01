@@ -24,3 +24,6 @@
     width: 270px;
     height: 40px;
 }
+.active-option {
+    border-color: #019160 !important;
+}

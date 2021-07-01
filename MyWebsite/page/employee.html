@@ -17,6 +17,7 @@
     <link href="../css/common/grid.css" rel="stylesheet" />
     <link href="../css/common/title.css" rel="stylesheet" />
     <link href="../css/common/select.css" rel="stylesheet" />
+    <link href="../css/common/dialog.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar">
@@ -61,7 +62,7 @@
         <div class="content-header">
             <div class="title">Danh sách nhân viên</div>
             <div class="content-feature">
-                <button class="m-default-button">
+                <button id="btn-add" class="m-default-button">
                     <div class="button-icon"></div>
                     <div class="button-name">Thêm nhân viên </div>
                 </button>
@@ -271,160 +272,174 @@
             </div>
             <div class="max-employee">10 nhân viên/trang</div>
         </div>
-        
+
     </div>
-    <div class="layout-blur">
-        
-    </div>
-    <div class="employee-detail">
-        <div class="title">THÔNG TIN NHÂN VIÊN</div>
-        <img class="close-button" src="/icon/x.svg" alt="">
-        <div class="employee-detail-content">
-            <div class="image-upload">
-                <input class="input-image" type="file" />
-                <img id="upload-img" src="/img/default-avatar.jpg" alt="your image" />
-                <div class="note">Vui lòng chọn ảnh có định <br /> dạng <br />.jpg, .jpeg, .png, .gif.)</div>
-            </div>
-            <div class="employee-information">
-                <div class="general-information">
-                    <div class="sub-title">A. THÔNG TIN CHUNG:</div>
-                    <div class="input-information" tabindex="100">
-                        <div class="name-information">
-                            Mã nhân viên (<span style="color: red;"> *  </span>)
-                        </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information" tabindex="103">
-                        <div class="name-information">
-                            Họ và tên (<span style="color: red;"> *  </span>)
-                        </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information" tabindex="102">
-                        <div class="name-information">
-                            Ngày sinh
-                        </div>
-                        <input type="date" >
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Giới tính
-                        </div>
-                        <div class="input-field" >
-                            <input type="text" disabled />
-                            <div class="select-custom">
-                                <div>Nam</div>
-                                <div>Nữ</div>
-                            </div>
-                            <i class="fas fa-chevron-down icon-input"></i>
-                        </div>
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Số CMTND/ Căn cước (<span style="color: red;"> *  </span>)
-                        </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Ngày cấp
-                        </div>
-                        <input type="date" />
-                    </div>
-                    <div class="input-information block">
-                        <div class="name-information">
-                            Nơi cấp
-                        </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Email (<span style="color: red;"> *  </span>)
-                        </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Số điện thoại (<span style="color: red;"> *  </span>)
-                        </div>
-                        <input type="text" />
-                    </div>
+    <div class="m-dialog">
+        <div class="layout-blur"></div>
+        <div class="employee-detail">
+            <div class="title">THÔNG TIN NHÂN VIÊN</div>
+            <img id="btn-close" class="close-button" src="/icon/x.svg" alt="">
+            <div class="employee-detail-content">
+                <div class="image-upload">
+                    <input class="input-image" type="file" />
+                    <img id="upload-img" src="/img/default-avatar.jpg" alt="your image" />
+                    <div class="note">Vui lòng chọn ảnh có định <br /> dạng <br />.jpg, .jpeg, .png, .gif.)</div>
                 </div>
-                <div class="work-information">
-                    <div class="sub-title">B. THÔNG TIN CÔNG VIỆC:</div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Vị trí
-                        </div>
-                        <div class="input-field">
-                            <input type="text" disabled/>
-                            <div class="select-custom ">
-                                <div>Giám đốc</div>
-                                <div>HR</div>
-                                <div>Nhân viên thử việc</div>
-                                <div>Nhân viên chính thức</div>
+                <div class="employee-information">
+                    <div class="general-information">
+                        <div class="sub-title">A. THÔNG TIN CHUNG:</div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Mã nhân viên (<span style="color: red;"> *  </span>)
                             </div>
-                            <i class="fas fa-chevron-down icon-input"></i>
+                            <input class="user-input" type="text" />
                         </div>
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Phòng ban
+                        <div class="input-information">
+                            <div class="name-information">
+                                Họ và tên (<span style="color: red;"> *  </span>)
+                            </div>
+                            <input class="user-input" type="text" />
                         </div>
-                        <div class="input-field">
-                            <input type="text" disabled/>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Ngày sinh
+                            </div>
+                            <input class="user-input" type="date">
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Giới tính
+                            </div>
+                            <div class="select-container">
+                                <input type="text" readonly />
                                 <div class="select-custom">
-                                    <div>Phòng nhân sự</div>
-                                    <div>Phòng sản xuất</div>
-                                    <div>Phòng nghiên cứu</div>
+                                    <div class="active-option" >Nam</div>
+                                    <div >Nữ</div>
                                 </div>
                                 <i class="fas fa-chevron-down icon-input"></i>
+                            </div>
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Số CMTND/ Căn cước (<span style="color: red;"> *  </span>)
+                            </div>
+                            <input class="user-input number-input" type="text" />
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Ngày cấp
+                            </div>
+                            <input class="user-input" type="date" />
+                        </div>
+                        <div class="input-information block">
+                            <div class="name-information">
+                                Nơi cấp
+                            </div>
+                            <input class="user-input" type="text" />
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Email (<span style="color: red;"> *  </span>)
+                            </div>
+                            <input class="user-input" type="text" />
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Số điện thoại (<span style="color: red;"> *  </span>)
+                            </div>
+                            <div class= "number-input-container">
+                                <input class="user-input number-input" type="text" />
+                            </div>
                         </div>
                     </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Mã số thuế cá nhân
+                    <div class="work-information">
+                        <div class="sub-title">B. THÔNG TIN CÔNG VIỆC:</div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Vị trí
+                            </div>
+                            <div class="select-container">
+                                <input type="text" readonly />
+                                <div class="select-custom ">
+                                    <div class="active-option" >Giám đốc</div>
+                                    <div >HR</div>
+                                    <div >Nhân viên thử việc</div>
+                                    <div >Nhân viên chính thức</div>
+                                </div>
+                                <i class="fas fa-chevron-down icon-input"></i>
+                            </div>
                         </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Mức lương cơ bản
+                        <div class="input-information">
+                            <div class="name-information">
+                                Phòng ban
+                            </div>
+                            <div class="select-container">
+                                <input type="text" readonly />
+                                <div class="select-custom">
+                                    <div class="active-option" >Phòng nhân sự</div>
+                                    <div >Phòng sản xuất</div>
+                                    <div >Phòng nghiên cứu</div>
+                                </div>
+                                <i class="fas fa-chevron-down icon-input"></i>
+                            </div>
                         </div>
-                        <input type="text" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                           Ngày gia nhập công ty
+                        <div class="input-information">
+                            <div class="name-information">
+                                Mã số thuế cá nhân
+                            </div>
+                            <input class="user-input number-input" type="text" />
                         </div>
-                        <input type="date" />
-                    </div>
-                    <div class="input-information">
-                        <div class="name-information">
-                            Tình trạng công việc
+                        <div class="input-information">
+                            <div class="name-information">
+                                Mức lương cơ bản
+                            </div>
+                            <div class="relative number-input-container">
+
+                                <input class="user-input input-currency number-input" type="text" />
+                                <div class="currency">(VND)</div>
+                          
+                            </div>
+
                         </div>
-                        <div class="input-field">
-                            <input type="text" disabled/>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Ngày gia nhập công ty
+                            </div>
+                            <input class="user-input" type="date" />
+                        </div>
+                        <div class="input-information">
+                            <div class="name-information">
+                                Tình trạng công việc
+                            </div>
+                            <div class="select-container">
+                                <input type="text" readonly />
                                 <div class="select-custom dropup">
-                                    <div>Đang làm việc</div>
-                                    <div>Đã nghỉ việc</div>
+                                    <div class="active-option" >Đang làm việc</div>
+                                    <div >Đã nghỉ việc</div>
                                 </div>
                                 <i class="fas fa-chevron-down icon-input"></i>
+                            </div>
                         </div>
                     </div>
+
                 </div>
-                
+            </div>
+            <div class="footer">
+                <button class="cancel">Hủy</button>
+                <button>
+                    Lưu
+                </button>
             </div>
         </div>
-        <div class="footer">
-            <div class="cancel">Hủy</div>
-            <button>
-                Lưu
-            </button>
+        <div class="">
+
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../js/base.js"></script>
     <script src="../js/employee.js"></script>
+    <script src="../js/employeeform.js"></script>
+
 </body>
 </html>
