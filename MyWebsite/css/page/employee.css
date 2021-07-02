@@ -14,7 +14,7 @@ table th,td{
     border-bottom: 1px solid #bbbbbb;
     padding: 10px;
     height: 48px;
-    text-align: left;
+    text-align: center;
 }
 table tr:nth-child(odd){
     background-color: #e9ebee;
@@ -27,4 +27,9 @@ table th{
 }
 td:hover tr{
     background-color: #bbbbbb;
+}
+.edit-icon{
+    align-self: center;
+    width: 20px;
+    height: 20px;
 }

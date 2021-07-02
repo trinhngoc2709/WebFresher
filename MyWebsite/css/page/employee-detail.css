@@ -1,9 +1,5 @@
 .employee-detail {
-    display: block;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 4px;
     width: 0px;
     height: 870px;
     background-color: #ffffff;

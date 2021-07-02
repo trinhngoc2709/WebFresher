@@ -48,6 +48,14 @@
         border: 6px solid transparent;
         border-color: #FF4747 transparent transparent transparent;
     }
+.center-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');
