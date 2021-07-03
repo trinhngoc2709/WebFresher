@@ -56,6 +56,9 @@
     bottom: 0;
     margin: auto;
 }
+button{
+    cursor: pointer;
+}
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');
