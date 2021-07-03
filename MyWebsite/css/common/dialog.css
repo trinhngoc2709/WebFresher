@@ -105,16 +105,15 @@
     border-radius: 4px;
     overflow: hidden;
 }
-.popup-list .popup-content{
-    margin: 24px;
-    margin-top: 0px;
-    font-size: 13px;
-}
+    .popup-list .popup-content{
+        margin: 24px;
+        margin-top: 0px;
+        font-size: 13px;
+    }
     .popup-list .block-content {
         display: flex;
         align-items: center;
     }
-
         .popup-list .block-content:not(:last-of-type) {
             margin-bottom: 16px;
         }
@@ -128,15 +127,15 @@
         background-repeat: no-repeat;
         margin-right: 10px;
     }
-.popup-list .close-button {
-    width: 20px;
-    height: 20px;
-    padding: 10px;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-}
-
-    .popup-list .close-button:hover {
-        background-color: #e5e5e5;
+    .popup-list .close-button {
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
     }
+
+        .popup-list .close-button:hover {
+            background-color: #e5e5e5;
+        }

@@ -5,20 +5,20 @@
     border-radius: 4px;
     height: 40px;
 }
-input[type=text]:read-only {
-    background: #ffffff;
-    font-family: GoogleSans-Regular;
-    color: rgb(49, 47, 47);
-}
+    input[type=text]:read-only {
+        background: #ffffff;
+        font-family: GoogleSans-Regular;
+        color: rgb(49, 47, 47);
+    }
 .input-search {
     padding: 0px 16px;
     padding-left: 40px;
     width: 300px;
     margin-right: 10px;
 }
-.input-search:focus{
-    border-color: #019160;
-}
+    .input-search:focus{
+        border-color: #019160;
+    }
 .input-currency {
     text-align: right;
     padding-right: 56px;

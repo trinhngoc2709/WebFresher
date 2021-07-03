@@ -39,35 +39,35 @@
             height: 44px;
             line-height: 44px;
         }
-        .navbar .navbar-content .navbar-item:hover{
-            background-color: #e5e5e5;
-            color: #000000;
-            cursor: pointer;
-        }
-        .navbar-item .navbar-item-icon{
-            align-self: center;
-            height: 20px;
-            width: 20px;
-            margin-right: 10px;
-        }
+            .navbar .navbar-content .navbar-item:hover{
+                background-color: #e5e5e5;
+                color: #000000;
+                cursor: pointer;
+            }
+    .navbar-item .navbar-item-icon{
+        align-self: center;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+    }
         
-    .navbar-item-icon-dashboard{
-        background-image: url('../../icon/dashboard.png');
-        background-size: contain;
-    }
-    .navbar-item-icon-report {
-        background-image: url('../../icon/report.png');
-        background-size: contain;
-    }
-    .navbar-item-icon-order {
-        background-image: url('../../icon/shopping-cart.png');
-        background-size: contain;
-    }
-    .navbar-item-icon-employee {
-        background-image: url('../../icon/dic-employee.png');
-        background-size: contain;
-    }
-    .navbar-item-icon-setting {
-        background-image: url('../../icon/setting.png');
-        background-size: contain;
-    }
+.navbar-item-icon-dashboard{
+    background-image: url('../../icon/dashboard.png');
+    background-size: contain;
+}
+.navbar-item-icon-report {
+    background-image: url('../../icon/report.png');
+    background-size: contain;
+}
+.navbar-item-icon-order {
+    background-image: url('../../icon/shopping-cart.png');
+    background-size: contain;
+}
+.navbar-item-icon-employee {
+    background-image: url('../../icon/dic-employee.png');
+    background-size: contain;
+}
+.navbar-item-icon-setting {
+    background-image: url('../../icon/setting.png');
+    background-size: contain;
+}

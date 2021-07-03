@@ -11,19 +11,19 @@
     border : none;
     cursor: pointer;
 }
-.m-default-button:hover{
-    background-color: #2FBE8E;
-}
-.m-default-button:active{
-    background-color: #01B075
-}
+    .m-default-button:hover{
+        background-color: #2FBE8E;
+    }
+    .m-default-button:active{
+        background-color: #01B075
+    }
     .m-default-button .button-icon{
         margin-right: 8px;
     }
-    @font-face {
-        font-family: 'GoogleSans-Regular';
-        src: url('../../font/GoogleSans-Regular.otf') format('opentype');
-    }
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../../font/GoogleSans-Regular.otf') format('opentype');
+}    
 .m-button-refresh {
     background-image: url('../../icon/refresh.png');
     background-repeat: no-repeat;

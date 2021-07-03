@@ -1,15 +1,30 @@
 ﻿class BaseJs {
-    constructor() {
+    /***
+     Created by tbNgoc at 30/06/2021
+     * **/
+     constructor() {
 
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Format VND money string 
+     * **/
     formatMoney(money) {
         if (money) {
             return money.replaceAll('.', '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         } else return "0";
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Check valid number
+     * **/
     checkValidNumber(str) {
         return /^\d+$/.test(str.replaceAll('.', '')) || "" == str;
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Validate the email
+     * **/
     validateEmail(email) {
         if (email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -17,6 +32,10 @@
         } else return false;
 
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Check Tax Number
+     * **/
     checkTaxNumber(taxString) {
         if (taxString) {
             let toNumberTax = parseInt(taxString, 10);
@@ -26,41 +45,61 @@
             else return true;
         } else return false;
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Check identity number
+     * **/
     checkIdNumber(idString) {
         console.log(idString.length);
         if (idString && this.checkValidNumber(idString) && (idString.length == 9 || idString.length == 12)) {
             return true;
         } return false;
     }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Load the event of employee page
+     * **/
     loadEvent() {
-        let defaultAvatar = "/img/default-avatar.jpg";
-        // On off the employee detail 
+        // Link for default avatar
+        let defaultAvatar = "../img/default-avatar.jpg";
+        // Show the employee detail event
         document.querySelector('#btn-add').addEventListener("click", function (e) {
-            document.querySelector('.layout-blur').style.width = "100vw";
-            document.querySelector('.employee-detail').style.width = "900px";
-            document.querySelector('.m-dialog').style.width = "100vw";
-            initCustomizedSelect();
-            document.querySelector('.input-information input').focus();
+            document.querySelector('.layout-blur').style.width = "100vw"; // display blur layout
+            document.querySelector('.employee-detail').style.width = "900px"; // display employee-detail
+            document.querySelector('.m-dialog').style.width = "100vw"; // display dialog container
+            initCustomizedSelect(); // initialize customized select
+            document.querySelector('.input-information input').focus(); // Focus to first input
         });
-
-        // Add event click to customized select
+        // Add event click to display customized select
         let customizedSelects = document.querySelectorAll('.select-container');
         customizedSelects.forEach(element => {
-            // click event
+            // click event : display customized select, rotate input icon
             element.addEventListener("click", () => {
                 displayCustomizedSelect(element.childNodes[3]);
+                let iconInput = element.querySelector('.icon-input');
+                rotateIconinput(iconInput);
             });
+            // Focus out : Hide the customized select, rotate input icon
+            element.addEventListener("focusout",()=>{
+                let iconInput = element.querySelector('.icon-input');
+                rotateIconinput(iconInput);
+                let customizedSelect = element.childNodes[3];
+                customizedSelect.style.width = "0px";
+                customizedSelect.style.height = "0px";
+            })
             // Key up events Enter: confirm, Arrow Up, ArrowDown: change the option
             element.addEventListener("keyup", (e) => {
                 let customizedSelect = element.childNodes[3];
                 let options = e.target.parentElement.childNodes[3].children;
-                if (e.code === "Enter") {
+                if (e.code === "Enter") {// Enter event : display customized select, rotate the input
+                    let iconInput = e.target.parentElement.querySelector('.icon-input');
+                    rotateIconinput(iconInput);
                     displayCustomizedSelect(customizedSelect);
-                } else if (e.code == "ArrowUp") {
+                } else if (e.code == "ArrowUp") {// ArrowUp event : change the option
                     if (customizedSelect.style.width == "auto") {
                         displayOption(options, e.code, e.target);
                     }
-                } else if (e.code == "ArrowDown") {
+                } else if (e.code == "ArrowDown") {// ArrowDown event : change the option
                     if (customizedSelect.style.width == "auto") {
                         displayOption(options, e.code, e.target);
                     }
@@ -68,13 +107,28 @@
             });
 
         })
+        // Rotate 180 degree the element
+        function rotateIconinput (iconInput) {
+            if(iconInput.style.transform == ""){
+                // Rotate drop down
+                iconInput.style.transform = "rotate(180deg)";
+                iconInput.style.top = "8.31px";
+                iconInput.style.right = "9px";
+            }else{
+                // Rotate to initial
+                iconInput.style.transform = "";
+                iconInput.style.top = "14.31px";
+                iconInput.style.right = "0px";
+            }
+        }
+        // Set event for options of customized select
         let options = document.querySelectorAll('.select-container .select-custom div'); // options
         options.forEach(element => {
             element.addEventListener("click", (e) => {
                 e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
             })
         });
-        // Function display customized select
+        // Function display/hide customized select
         function displayCustomizedSelect(customizedSelect) {
             if (customizedSelect.style.width != "auto") {
                 customizedSelect.style.width = "auto";
