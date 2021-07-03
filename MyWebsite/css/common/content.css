@@ -33,6 +33,9 @@
             display: inline;
             position: absolute;
         }
+        .content .filter-bar .filter-select:last-of-type{
+            margin-left: 214px;
+        }
         .content .filter-bar .filter-select .icon-input{
             position: absolute;
             width: 20px;

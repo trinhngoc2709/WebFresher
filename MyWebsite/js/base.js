@@ -62,6 +62,10 @@
     loadEvent() {
         // Link for default avatar
         let defaultAvatar = "../img/default-avatar.jpg";
+        // Initialize the value for select field for employee page
+        let customInputEmployeePage = document.querySelectorAll('.filter-left .select-container input');
+        customInputEmployeePage[0].value = "Tất cả phòng ban";
+        customInputEmployeePage[1].value = "Tất cả vị trí";
         // Show the employee detail event
         document.querySelector('#btn-add').addEventListener("click", function (e) {
             document.querySelector('.layout-blur').style.width = "100vw"; // display blur layout
@@ -124,7 +128,16 @@
         // Set event for options of customized select
         let options = document.querySelectorAll('.select-container .select-custom div'); // options
         options.forEach(element => {
-            element.addEventListener("click", (e) => {
+            console.log(element);
+            element.addEventListener("mousedown", (e) => {
+                let optionsTarget = e.target.parentElement.childNodes;
+                optionsTarget.forEach(el=>{
+                    if(el.classList)
+                        el.classList.remove('active-option');
+                })
+                
+                e.target.classList.add('active-option');
+                console.log(e.target.classList);
                 e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
             })
         });
