@@ -80,9 +80,7 @@
         // Link for default avatar
         let defaultAvatar = "../img/default-avatar.jpg";
         // Initialize the value for select field for employee page
-        let customInputEmployeePage = document.querySelectorAll('.filter-left .select-container input');
-        customInputEmployeePage[0].value = "Tất cả phòng ban";
-        customInputEmployeePage[1].value = "Tất cả vị trí";
+        initCustomizedSelectEmployeePage();
         // Show the employee detail event
         document.querySelector('#btn-add').addEventListener("click", function (e) {
             document.querySelector('.layout-blur').style.width = "100vw"; // display blur layout
@@ -103,7 +101,7 @@
             // Focus out : Hide the customized select, rotate input icon
             element.addEventListener("focusout",()=>{
                 let iconInput = element.querySelector('.icon-input');
-                rotateIconinput(iconInput);
+                //rotateIconinput(iconInput);
                 let customizedSelect = element.childNodes[3];
                 customizedSelect.style.width = "0px";
                 customizedSelect.style.height = "0px";
@@ -145,17 +143,16 @@
         // Set event for options of customized select
         let options = document.querySelectorAll('.select-container .select-custom div'); // options
         options.forEach(element => {
-            console.log(element);
+            let iconInput = element.parentElement.parentElement.querySelector('.icon-input');
             element.addEventListener("mousedown", (e) => {
                 let optionsTarget = e.target.parentElement.childNodes;
                 optionsTarget.forEach(el=>{
                     if(el.classList)
                         el.classList.remove('active-option');
                 })
-                
                 e.target.classList.add('active-option');
-                console.log(e.target.classList);
                 e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
+                rotateIconinput(iconInput);
             })
         });
         // Function display/hide customized select
@@ -416,9 +413,9 @@
                 }
             })
         }
-        // Initialize for select custom
+        // Initialize for select custom of employee detail page
         function initCustomizedSelect() {
-            // Clear the user's input and initilize the value for select field
+            // Clear the user's input and initialize the value for select field
             let inputs = document.querySelectorAll('.employee-detail .employee-detail-content .employee-information .input-information .select-container input');
             inputs[0].value = "Nam";
             inputs[1].value = "Giám đốc";
@@ -428,6 +425,12 @@
             userInputs.forEach(element => {
                 element.value = "";
             })
+        }
+        // Initialize for select custom of employee page
+        function initCustomizedSelectEmployeePage(){
+            let customInputEmployeePage = document.querySelectorAll('.filter-left .select-container input');
+            customInputEmployeePage[0].value = "Tất cả phòng ban";
+            customInputEmployeePage[1].value = "Tất cả vị trí";
         }
     }
 }
