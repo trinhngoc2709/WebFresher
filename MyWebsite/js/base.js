@@ -76,6 +76,21 @@
      Load the event of employee page
      * **/
     loadEvent() {
+        /* Event for Navbar */
+        // Event for click options on nav-item
+        // Initialize the chosen option
+        let navItems = document.querySelectorAll('.navbar-content .navbar-item');
+        navItems.forEach(element =>{
+            if(element.innerText == "Danh mục nhân viên")
+                element.classList.add("active-option");
+            element.addEventListener("click",()=>{
+                navItems.forEach(e1=>{
+                    e1.classList.remove("active-option");
+                })
+                element.classList.add("active-option");
+            });
+        })
+
         /* Event for Customize Select */
         // Add event click to display customized select
         let customizedSelects = document.querySelectorAll('.select-container');

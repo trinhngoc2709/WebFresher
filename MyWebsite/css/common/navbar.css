@@ -41,7 +41,6 @@
         }
             .navbar .navbar-content .navbar-item:hover{
                 background-color: #e5e5e5;
-                color: #000000;
                 cursor: pointer;
             }
     .navbar-item .navbar-item-icon{

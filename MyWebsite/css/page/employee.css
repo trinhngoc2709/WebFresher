@@ -28,8 +28,10 @@ table th{
 td:hover tr{
     background-color: #bbbbbb;
 }
-.edit-icon{
+.edit-icon,.delete-icon{
     align-self: center;
     width: 20px;
     height: 20px;
+    margin-left: 5px;
+    cursor: pointer;
 }
