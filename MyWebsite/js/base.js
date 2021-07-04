@@ -101,7 +101,8 @@
             // Focus out : Hide the customized select, rotate input icon
             element.addEventListener("focusout",()=>{
                 let iconInput = element.querySelector('.icon-input');
-                //rotateIconinput(iconInput);
+                if(iconInput.style.transform != "")
+                    rotateIconinput(iconInput);
                 let customizedSelect = element.childNodes[3];
                 customizedSelect.style.width = "0px";
                 customizedSelect.style.height = "0px";
