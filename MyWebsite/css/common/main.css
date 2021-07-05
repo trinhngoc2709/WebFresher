@@ -59,6 +59,10 @@
 button{
     cursor: pointer;
 }
+.rotate-oposite{    
+    transform: rotateY(180deg);
+}
+
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');

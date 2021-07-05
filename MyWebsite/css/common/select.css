@@ -24,6 +24,9 @@
         width: 270px;
         height: 40px;
     }
+        .select-custom div:hover {
+            background-color: #E9EBEE;
+        }
 .active-option {
     border-color: #019160 !important;
     background-color: #019160 !important;

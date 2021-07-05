@@ -1,4 +1,5 @@
-﻿class BaseJs {
+﻿
+class BaseJs {
     /***
      Created by tbNgoc at 30/06/2021
      * **/
@@ -89,6 +90,35 @@
                 })
                 element.classList.add("active-option");
             });
+        })
+        // Event for resize button 
+        let btnResize = document.querySelector('.navbar .navbar-content .btn-resize');
+        btnResize.addEventListener('click', (e) => {
+            let navbarContent = e.target.parentElement.parentElement;
+            let navbarItems = navbarContent.querySelectorAll('.navbar-item');
+            let navbarTextItems = navbarContent.querySelectorAll('.navbar-item .navbar-item-text');
+            if (e.target.classList.contains('rotate-oposite')) {
+                navbarItems.forEach(element => {
+                    element.style.backgroundPosition = "0px center";
+                    element.style.marginLeft = "16px";
+                    element.style.marginRight = "10px";
+                })
+                navbarTextItems.forEach(element => {
+                    element.style.display = "block";
+                })
+                e.target.classList.remove('rotate-oposite');
+                navbarContent.style.width = "100%";
+            } else {
+                navbarItems.forEach(element => {
+                    element.style.backgroundPosition = "center center";
+                    element.style.margin = "0px";
+                })
+                navbarTextItems.forEach(element => {
+                    element.style.display = "none";
+                })
+                e.target.classList.add('rotate-oposite');
+                navbarContent.style.width = "52px";
+            }
         })
 
         /* Event for Customize Select */

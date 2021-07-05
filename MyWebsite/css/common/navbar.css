@@ -4,13 +4,14 @@
     width: 220px;
     height: 100vh;
     background-color: #ffffff;
-    border-right: 1px solid #e5e5e5;
+    
 }
     .navbar .logo-site {
         display: flex;
         align-items: flex-start;
         width: 100%;
         height: 60px;
+        border-right: 1px solid #e5e5e5;
     }
         .navbar .logo-site .toggle-icon{
             background: url('../../img/toggle.png');
@@ -29,44 +30,59 @@
             margin-top: 12px;
             margin-bottom: 12px;
         }
-    .navbar .navbar-content{
+    .navbar .navbar-content {
         width: 100%;
+        border-right: 1px solid #e5e5e5;
+        height: calc(100% - 61.5px);
+        position: relative;
     }
         .navbar .navbar-content .navbar-item {
-            display: flex;
+            padding-left: 25px;
             margin-left: 16px;
             margin-right: 10px;
             height: 44px;
             line-height: 44px;
+            background-repeat: no-repeat;
+            background-position: 0px center;
+            background-size: 20px;
         }
-            .navbar .navbar-content .navbar-item:hover{
+            .navbar .navbar-content .navbar-item:hover {
                 background-color: #e5e5e5;
                 cursor: pointer;
             }
-    .navbar-item .navbar-item-icon{
-        align-self: center;
-        height: 20px;
-        width: 20px;
-        margin-right: 10px;
-    }
+        .navbar .navbar-content .btn-resize {
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            background-color: #b8c7d6;
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            bottom: 20px;
+            right: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            pointer-events: none;
+        }
+            .navbar .navbar-content .btn-resize img{
+                width: 14px;
+                height: 14px;
+                pointer-events: visibleStroke;
+            }
         
 .navbar-item-icon-dashboard{
     background-image: url('../../icon/dashboard.png');
-    background-size: contain;
 }
 .navbar-item-icon-report {
     background-image: url('../../icon/report.png');
-    background-size: contain;
 }
 .navbar-item-icon-order {
     background-image: url('../../icon/shopping-cart.png');
-    background-size: contain;
 }
 .navbar-item-icon-employee {
     background-image: url('../../icon/dic-employee.png');
-    background-size: contain;
 }
 .navbar-item-icon-setting {
     background-image: url('../../icon/setting.png');
-    background-size: contain;
 }

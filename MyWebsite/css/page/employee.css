@@ -15,6 +15,7 @@ table th,td{
     padding: 10px;
     height: 48px;
     text-align: center;
+    white-space: nowrap;
 }
 table tr:nth-child(odd){
     background-color: #e9ebee;
