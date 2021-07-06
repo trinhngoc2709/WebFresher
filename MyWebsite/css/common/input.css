@@ -11,10 +11,28 @@
         color: rgb(49, 47, 47);
         cursor: pointer;
     }
+.icon-container{
+    position: absolute;
+    height: 95%;
+    width: 36px;
+    right: 1px;
+    top: 1px;
+    cursor: pointer;
+    border-left: 1px solid #bbbbbb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.input-container{
+    display: inline-block;
+    position: relative;
+}
 .input-search {
-    padding: 0px 16px;
+    padding: 0px 30px;
     padding-left: 40px;
-    width: 300px;
+    width: 400px;
     margin-right: 10px;
 }
     .input-search:focus{

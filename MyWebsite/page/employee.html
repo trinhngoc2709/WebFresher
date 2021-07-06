@@ -21,6 +21,7 @@
     <link href="../css/common/dialog.css" rel="stylesheet" />
     <link href="../css/common/padding.css" rel="stylesheet" />
     <link href="../css/common/border.css" rel="stylesheet" />
+    <link href="../css/common/background.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -72,52 +73,55 @@
         </div>
         <div class="filter-bar">
             <div class="filter-left">
-                <input class="icon-search input-search" type="text"
-                    placeholder="Tìm kiếm theo mã Mã, Tên hoặc Số điện thoại">
-                    <div class="select-container filter-select">
-                        <input type="text" readonly />
-                        <div class="select-custom">
-                            <div class="option active-option">
-                                <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
-                                <div class="option-content ">Tất cả phòng ban</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
+                <div class="input-container">
+                    <div class="x-icon"></div><input class="icon-search input-search user-input" type="text"
+                        placeholder="Tìm kiếm theo mã Mã, Tên hoặc Số điện thoại">
+                </div>
+                <div class="select-container filter-select">
+                    <div class="x-icon combobox-icon"></div>
+                    <input class="combobox user-input" type="text" />
+                    <div class="select-custom">
+                        <div class="option">
+                            <div class="option-icon"><img src="../icon/check.png" alt=""></div>
+                            <div class="option-content ">Tất cả phòng ban</div>
                         </div>
-                        <i class="fas fa-chevron-down icon-input"></i>
-                    </div>
-                    <div class="select-container filter-select">
-                        <input type="text" readonly />
-                        <div class="select-custom">
-                            <div class="option active-option">
-                                <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
-                                <div class="option-content ">Tất cả vị trí</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
-                            <div class="option">
-                                <img src="../icon/check.png" alt="">
-                                <div class="option-content">Chọn tôi đi</div>
-                            </div>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
                         </div>
-                        <i class="fas fa-chevron-down icon-input"></i>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
+                        </div>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
+                        </div>
                     </div>
+                    <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
+                </div>
+                <div class="select-container filter-select">
+                    <input type="text" readonly />
+                    <div class="select-custom">
+                        <div class="option active-option">
+                            <div class="option-icon"><img src="../icon/check.png" alt=""></div>
+                            <div class="option-content ">Tất cả vị trí</div>
+                        </div>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
+                        </div>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
+                        </div>
+                        <div class="option">
+                            <img src="../icon/check.png" alt="">
+                            <div class="option-content">Chọn tôi đi</div>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down icon-input"></i>
+                </div>
             </div>
             <div class="filter-right">
                 <button class="m-button-refresh">
@@ -149,7 +153,6 @@
             <div class="display-employee"></div>
             <div class="paging">
                 <img src="../icon/btn-firstpage.svg" alt="">
-                <img src="../icon/btn-firstpage.svg" alt="">
                 <img src="../icon/btn-prev-page.svg" alt="">
                 <div class="paging-number">1</div>
                 <div class="paging-number">2</div>
@@ -180,19 +183,25 @@
                             <div class="name-information">
                                 Mã nhân viên (<span style="color: red;"> * </span>)
                             </div>
-                            <input class="user-input required" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div><input class="user-input required" type="text" />
+                            </div>
+
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Họ và tên (<span style="color: red;"> * </span>)
                             </div>
-                            <input class="user-input required" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div>
+                                <input class="user-input required" type="text" />
+                            </div>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Ngày sinh
                             </div>
-                            <input class="user-input" type="date">
+                            <input type="date">
                         </div>
                         <div class="input-information">
                             <div class="name-information">
@@ -202,7 +211,7 @@
                                 <input type="text" readonly />
                                 <div class="select-custom">
                                     <div class="option active-option">
-                                        <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
+                                        <div class="option-icon"><img src="../icon/check.png" alt=""></div>
                                         <div class="option-content ">Nam</div>
                                     </div>
                                     <div class="option">
@@ -217,19 +226,25 @@
                             <div class="name-information">
                                 Số CMTND/ Căn cước (<span style="color: red;"> * </span>)
                             </div>
-                            <input class="user-input id-input" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div>
+                                <input class="user-input id-input" type="text" />
+                            </div>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Ngày cấp
                             </div>
-                            <input class="user-input" type="date" />
+                            <input type="date" />
                         </div>
                         <div class="input-information block">
                             <div class="name-information">
                                 Nơi cấp
                             </div>
-                            <input class="user-input" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div>
+                                <input class="user-input" type="text" />
+                            </div>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
@@ -241,7 +256,10 @@
                             <div class="name-information">
                                 Số điện thoại (<span style="color: red;"> * </span>)
                             </div>
-                            <input class="user-input number-input" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div>
+                                <input class="user-input number-input" type="text" />
+                            </div>
                         </div>
                     </div>
                     <div class="work-information">
@@ -254,7 +272,7 @@
                                 <input type="text" readonly />
                                 <div class="select-custom">
                                     <div class="option active-option">
-                                        <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
+                                        <div class="option-icon"><img src="../icon/check.png" alt=""></div>
                                         <div class="option-content ">Giám đốc</div>
                                     </div>
                                     <div class="option">
@@ -281,7 +299,7 @@
                                 <input type="text" readonly />
                                 <div class="select-custom">
                                     <div class="option active-option">
-                                        <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
+                                        <div class="option-icon"><img src="../icon/check.png" alt=""></div>
                                         <div class="option-content ">Phòng nhân sự</div>
                                     </div>
                                     <div class="option">
@@ -304,24 +322,31 @@
                             <div class="name-information">
                                 Mã số thuế cá nhân
                             </div>
-                            <input class="user-input tax-input" type="text" />
+                            <div class="input-container">
+                                <div class="x-icon"></div>
+                                <input class="user-input tax-input" type="text" />
+                            </div>
+                            
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Mức lương cơ bản
                             </div>
-                            <div class="relative number-input-container">
-
-                                <input class="user-input input-currency number-input" type="text" />
-                                <div class="currency">(VND)</div>
+                            <div class="input-container">
+                                <div class="x-icon currency-icon"></div>
+                                <div class="relative number-input-container">
+                                    <input class="user-input input-currency number-input" type="text" />
+                                    <div class="currency">(VND)</div>
+                                </div>
                             </div>
+                            
 
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Ngày gia nhập công ty
                             </div>
-                            <input class="user-input" type="date" />
+                            <input type="date" />
                         </div>
                         <div class="input-information">
                             <div class="name-information">
@@ -331,7 +356,7 @@
                                 <input type="text" readonly />
                                 <div class="select-custom dropup">
                                     <div class="option active-option">
-                                        <div class="option-icon"><img src="../icon/check.png" alt="" ></div>
+                                        <div class="option-icon"><img src="../icon/check.png" alt=""></div>
                                         <div class="option-content ">Đang làm việc</div>
                                     </div>
                                     <div class="option">
@@ -358,7 +383,7 @@
         </div>
         <div class="popup-warning center-div">
             <div class="popup-title">Đóng form thông tin nhân viên</div>
-            <img  class="close-button" src="../icon/x.svg" alt="">
+            <img class="close-button" src="../icon/x.svg" alt="">
             <div class="popup-content">
                 <div class="icon-warning"></div>
                 <div class="content-warning">Bạn có thực sự muốn đóng form nhập <b>"Thông tin của<br />nhân viên"</b>
@@ -375,7 +400,7 @@
             <div class="popup-title">Lí do bị từ chối</div>
             <img class="close-button btn-pop-list" src="../icon/x.svg" alt="">
             <div class="popup-content error-content">
-                
+
             </div>
             <div class="popup-footer">
                 <button>
@@ -385,9 +410,12 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../js/common.js"></script>
     <script src="../js/base.js"></script>
     <script src="../js/employee.js"></script>
+    <script src="../js/dropdown.js"></script>
+    <script src="../js/navbar.js"></script>
+    <script src="../js/Button.js"></script>
+    <script src="../js/Input.js"></script>
 </body>
 
 </html>

@@ -29,23 +29,26 @@
         width: 100%;
         padding-left: 16px;
     }
+    .content input{
+        box-sizing: border-box;
+    }
+        .content .filter-bar .filter-left{
+            position: relative;
+            width: calc(100% - 56px);
+        }
         .content .filter-bar .filter-select{
             display: inline;
             position: absolute;
         }
         .content .filter-bar .filter-select .select-custom .option{
-            width: 210px;
+            width: 200px;
             box-sizing: border-box;
         }
         .content .filter-bar .filter-select:last-of-type{
             margin-left: 214px;
         }
         .content .filter-bar .filter-select .icon-input{
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: 0px;
-            top: 14.31px;
+            position: relative;
             pointer-events: none;
         }
     /* Paging Bar */

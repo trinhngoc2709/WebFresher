@@ -60,10 +60,37 @@
 button{
     cursor: pointer;
 }
-.rotate-oposite{    
+.rotate-opposite{    
     transform: rotateY(180deg);
 }
-
+.x-icon{
+    display: none;
+    background-image: url(../../icon/x.svg);
+    background-repeat: no-repeat;
+    background-size: 14px;
+    background-position: center center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50% 50%;
+    background-color: #e9ebee;
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    cursor: pointer;
+}
+.x-icon.combobox-icon{
+    right: 52px;
+    top: 10px;
+}
+.x-icon.currency-icon{
+    right: 0;
+    left: 16px;
+    z-index: 1;
+}
+.combobox{
+    width: 200px;
+    padding-right: 72px;
+}
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');

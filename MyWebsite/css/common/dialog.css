@@ -1,23 +1,25 @@
 ﻿.m-dialog {
-    width: 0;
+    display: none;
+    width: 100vw;
 }
 .layout-blur {
+    display: none;
     background-color: #808080;
-    width: 0vw;
+    width: 100vw;
     height: 100vh;
     opacity: 0.5;
-    transition: all 0.5s ease-in;
 }
 .popup-layout {
+    display: none;
     background-color: #808080;
-    width: 0vw;
+    width: 100vw;
     height: 100vh;
     opacity: 0.5;
-    transition: all 0.5s ease-in;
 }
 
 .popup-warning {
-    width: 0px; /* width display: 500px */
+    display: none;
+    width: 500px; /* width display: 500px */
     height: 191px;
     background-color: #ffffff;
     border-radius: 4px;
@@ -103,7 +105,8 @@
             }
 
 .popup-list {
-    width: 0px; /* width display: 500px */
+    display: none;
+    width: 500px; /* width display: 500px */
     height: 486px;
     background-color: #ffffff;
     border-radius: 4px;
