@@ -1,10 +1,9 @@
 ﻿.grid {
     margin: 0px 16px;
     margin-top: 16px;
-    box-sizing: border-box;
     height: calc(100vh - 230px);
     overflow: scroll;
-    
+    position: relative;
 }
 table {
     width: 100%;
@@ -12,10 +11,18 @@ table {
 }
 table th,td{
     border-bottom: 1px solid #bbbbbb;
-    padding: 10px;
-    height: 48px;
     text-align: center;
     white-space: nowrap;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 19px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+}
+table tr{
+    height: 48px;
+    box-sizing: border-box;
 }
 table tr:nth-child(odd){
     background-color: #e9ebee;
@@ -23,11 +30,10 @@ table tr:nth-child(odd){
 table th{
     position: sticky;
     top: 0;
-    padding-top: 0px;
     background-color: #ffffff;
 }
-td:hover tr{
-    background-color: #bbbbbb;
+tr:hover{
+    background-color: #bbbbbb !important;
 }
 .edit-icon,.delete-icon{
     align-self: center;

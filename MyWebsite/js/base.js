@@ -12,8 +12,21 @@ class BaseJs {
      * **/
     formatMoney(money) {
         if (money) {
-            return money.replaceAll('.', '').toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            return money.toString().replaceAll('.', '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         } else return "0";
+    }
+    /***
+     Created by tbNgoc at 30/06/2021
+     Format VND money string 
+     * **/
+     formatDate(date) {
+        if (date) {
+            let date = new Date();
+            let day = date.getDay(),month = date.getMonth() + 1, year = date.getFullYear();
+            day = day < 10 ? '0' + day : day;
+            month = month < 10 ? '0' + month : month;
+            return day +'/'+ month + '/' + year;
+        } else return "";
     }
     /***
      Created by tbNgoc at 30/06/2021
@@ -80,17 +93,17 @@ class BaseJs {
         /* Event for Navbar */
         // Event for click options on nav-item
         // Initialize the chosen option
-        let navItems = document.querySelectorAll('.navbar-content .navbar-item');
-        navItems.forEach(element =>{
-            if(element.innerText == "Danh mục nhân viên")
-                element.classList.add("active-option");
-            element.addEventListener("click",()=>{
-                navItems.forEach(e1=>{
-                    e1.classList.remove("active-option");
-                })
-                element.classList.add("active-option");
-            });
+        let navItems = $('.navbar-content .navbar-item');
+        $(navItems).each(function(){
+            if(this.innerText == "Danh mục nhân viên")
+                this.classList.add("active-option");
         })
+        $(navItems).click(function(){
+            let navItemSiblings = $(this).siblings();
+            $(navItemSiblings).removeClass("active-option");
+            $(this).addClass("active-option");
+        })
+
         // Event for resize button 
         let btnResize = document.querySelector('.navbar .navbar-content .btn-resize');
         btnResize.addEventListener('click', (e) => {
@@ -122,6 +135,7 @@ class BaseJs {
         })
 
         /* Event for Customize Select */
+        
         // Add event click to display customized select
         let customizedSelects = document.querySelectorAll('.select-container');
         customizedSelects.forEach(element => {
@@ -134,11 +148,10 @@ class BaseJs {
             // Focus out : Hide the customized select, rotate input icon
             element.addEventListener("focusout",()=>{
                 let iconInput = element.querySelector('.icon-input');
-                if(iconInput.style.transform != "")
+                if(iconInput.style.transform != ""){
                     rotateIconinput(iconInput);
-                let customizedSelect = element.childNodes[3];
-                customizedSelect.style.width = "0px";
-                customizedSelect.style.height = "0px";
+                    displayCustomizedSelect(element.childNodes[3]);
+                }
             })
             // Key up events Enter: confirm, Arrow Up, ArrowDown: change the option
             element.addEventListener("keyup", (e) => {
@@ -149,11 +162,11 @@ class BaseJs {
                     rotateIconinput(iconInput);
                     displayCustomizedSelect(customizedSelect);
                 } else if (e.code == "ArrowUp") {// ArrowUp event : change the option
-                    if (customizedSelect.style.width == "auto") {
+                    if (customizedSelect.style.display == "block") {
                         displayOption(options, e.code, e.target);
                     }
                 } else if (e.code == "ArrowDown") {// ArrowDown event : change the option
-                    if (customizedSelect.style.width == "auto") {
+                    if (customizedSelect.style.display == "block") {
                         displayOption(options, e.code, e.target);
                     }
                 }
@@ -176,27 +189,28 @@ class BaseJs {
         // Set event for options of customized select
         let options = document.querySelectorAll('.select-container .select-custom div'); // options
         options.forEach(element => {
-            let iconInput = element.parentElement.parentElement.querySelector('.icon-input');
-            element.addEventListener("mousedown", (e) => {
-                let optionsTarget = e.target.parentElement.childNodes;
-                optionsTarget.forEach(el=>{
-                    if(el.classList)
-                        el.classList.remove('active-option');
-                })
-                e.target.classList.add('active-option');
-                e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
-                rotateIconinput(iconInput);
+            $(element).mousedown(function(){
+               let optionSiblings = $(element).siblings();
+               $(optionSiblings).removeClass('active-option');
+               $(this).addClass('active-option');
+               console.log($(this).parent().parent())
+               $(this).parent().parent().val($(this).text());
             })
+            // let iconInput = element.parentElement.parentElement.querySelector('.icon-input');
+            // element.addEventListener("mousedown", (e) => {
+            //     let optionsTarget = e.target.parentElement.childNodes;
+            //     optionsTarget.forEach(el=>{
+            //         if(el.classList)
+            //             el.classList.remove('active-option');
+            //     })
+            //     e.target.classList.add('active-option');
+            //     e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
+            //     rotateIconinput(iconInput);
+            // })
         });
         // Function display/hide customized select
         function displayCustomizedSelect(customizedSelect) {
-            if (customizedSelect.style.width != "auto") {
-                customizedSelect.style.width = "auto";
-                customizedSelect.style.height = "auto";
-            } else {
-                customizedSelect.style.width = "0px";
-                customizedSelect.style.height = "0px";
-            }
+            $(customizedSelect).toggle();
         }
         // Display option after choosing
         function displayOption(options, keyCode, inputField) {

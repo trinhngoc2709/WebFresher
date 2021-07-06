@@ -6,14 +6,14 @@
     width: 0vw;
     height: 100vh;
     opacity: 0.5;
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-in;
 }
 .popup-layout {
     background-color: #808080;
     width: 0vw;
     height: 100vh;
     opacity: 0.5;
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-in;
 }
 
 .popup-warning {

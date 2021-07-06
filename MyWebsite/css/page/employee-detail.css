@@ -1,9 +1,9 @@
-.employee-detail {
+.employee-detail{
     border-radius: 4px;
     width: 0px;
-    height: 830px;
+    height: 820px;
     background-color: #ffffff;
-    transition: all 0.3s ease-out;
+    transition: all 0.5s ease-in;
     overflow: hidden;
 }
     .employee-detail .close-button{
@@ -19,6 +19,7 @@
     }
     .employee-detail .title{
         padding: 24px 24px;
+        padding-bottom: 0px;
         font-family: GoogleSans-Bold;
         font-size: 20px;
     }
@@ -26,7 +27,7 @@
         position: absolute;
         width: 100%;
         background-color: #e9ebee;
-        height: calc(100% - 710px - 73px);
+        height: calc(100% - 686px - 73px);
         display: flex;
         justify-content: flex-end;
         align-items: center;

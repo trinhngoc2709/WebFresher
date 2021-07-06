@@ -31,10 +31,10 @@
             margin-bottom: 12px;
         }
     .navbar .navbar-content {
-        width: 100%;
         border-right: 1px solid #e5e5e5;
         height: calc(100% - 61.5px);
         position: relative;
+        transition: all 0.3s ease-out;
     }
         .navbar .navbar-content .navbar-item {
             padding-left: 25px;

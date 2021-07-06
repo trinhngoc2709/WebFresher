@@ -75,7 +75,8 @@
                     <div class="select-container filter-select">
                         <input type="text" readonly />
                         <div class="select-custom">
-                            <div class="active-option">Phòng nhân sự</div>
+                            <div class="active-option">Tất cả phòng ban</div>
+                            <div>Phòng nhân sự</div>
                             <div>Phòng sản xuất</div>
                             <div>Phòng nghiên cứu</div>
                         </div>
@@ -89,7 +90,10 @@
                             <div>HR Manager</div>
                             <div>Manager</div>
                         </div>
-                        <i class="fas fa-chevron-down icon-input"></i>
+                        <div style="">
+                            <i class="fas fa-chevron-down icon-input"></i>
+                        </div>
+                        
                     </div>
             </div>
             <div class="filter-right">
@@ -98,197 +102,28 @@
             </div>
         </div>
         <div class="grid">
-            <table>
+            <table class="employee-table">
                 <thead>
                     <tr>
-                        <th>Sửa thông tin</th>
-                        <th>Mã nhân viên</th>
-                        <th>Họ và tên</th>
-                        <th>Giới tính</th>
-                        <th>Ngày sinh</th>
-                        <th>Điện thoại</th>
-                        <th>Email</th>
-                        <th>Chức vụ</th>
-                        <th>Phòng ban</th>
-                        <th>Mức lương cơ bản</th>
-                        <th>Tình trạng công việc</th>
+                        <th fieldName="Edit">Sửa thông tin</th>
+                        <th fieldName="EmployeeCode">Mã nhân viên</th>
+                        <th fieldName="FullName">Họ và tên</th>
+                        <th fieldName="GenderName">Giới tính</th>
+                        <th fieldName="DateOfBirth">Ngày sinh</th>
+                        <th fieldName="PhoneNumber">Điện thoại</th>
+                        <th fieldName="Email">Email</th>
+                        <th fieldName="PositionName">Chức vụ</th>
+                        <th fieldName="DepartmentName">Phòng ban</th>
+                        <th fieldName="Salary">Mức lương cơ bản</th>
+                        <th fieldName="WorkStatus">Tình trạng công việc</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /><img class="delete-icon" src="../icon/delete.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
-                    <tr>
-                        <td><img class="edit-icon" src="../icon/edit.png" /></td>
-                        <td>MF-914</td>
-                        <td>Trịnh Bảo Ngọc</td>
-                        <td>Nam</td>
-                        <td>27/09/2000</td>
-                        <td>0936032597</td>
-                        <td>trinhbaongoc2709@gmail.com</td>
-                        <td>Fresher Web</td>
-                        <td>Phòng sản xuất</td>
-                        <td>3000000</td>
-                        <td>Fresher</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
         <div class="paging-bar">
-            <div class="display-employee"> Hiển thị 1-10/10000 nhân viên</div>
+            <div class="display-employee"></div>
             <div class="paging">
                 <img src="../icon/btn-firstpage.svg" alt="">
                 <img src="../icon/btn-firstpage.svg" alt="">
@@ -300,7 +135,7 @@
                 <img src="../icon/btn-next-page.svg" alt="">
                 <img src="../icon/btn-lastpage.svg" alt="">
             </div>
-            <div class="max-employee">10 nhân viên/trang</div>
+            <div class="max-employee">12 nhân viên/trang</div>
         </div>
 
     </div>

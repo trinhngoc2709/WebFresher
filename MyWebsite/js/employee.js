@@ -13,6 +13,7 @@ class Employee extends BaseJs {
     ***/
     constructor() {
         super();
+        this.loadData();
         this.loadEvent();
         super.loadEvent();
     }
@@ -97,12 +98,28 @@ class Employee extends BaseJs {
     Method load event of employee page
     Created by tbngoc (1/7/2021)
     **/
+    getNewEmployeeId(){
+        $.ajax({
+            url : "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+            method :  "GET"
+        }).done( (res)=>{
+            return res;
+        }).fail( (rej) => { 
+            console.log(rej);
+        })
+
+    }
     /**
     Method load event of employee page
     Created by tbngoc (1/7/2021)
     **/
     loadEvent(){
         /* Common Events of related to employee  */
+        // Event for refesh
+        $('.m-button-refresh').click(()=>{
+            $('.employee-table tbody').empty();
+            this.loadData();
+        })
         // Close the error popup
         let closeErrorPopup = document.querySelector('.popup-list .popup-footer button');
         closeErrorPopup.addEventListener('click',closeErrorPopUp);
@@ -126,7 +143,7 @@ class Employee extends BaseJs {
         let closeButton = document.querySelector('.popup-footer button:last-of-type');
         let continueInputButton = document.querySelector('.popup-footer button:first-of-type');
         let continueInputButton1 = document.querySelector('.popup-warning .close-button');
-
+        
         // Close employee detail form
         closeButton.addEventListener("click", () => {
             document.querySelector('#upload-img').src = defaultAvatar;
@@ -225,6 +242,8 @@ class Employee extends BaseJs {
                 element.parentElement.querySelector(".wrong-input").remove();
         }
 
+
+
         /* Event for employee tab in homepage */
 
         // Initialize for select custom of employee page
@@ -235,16 +254,17 @@ class Employee extends BaseJs {
         }
         // Initialize the value for select field for employee page
         initValueSelected();
-        
         // Show the employee detail event
         document.querySelector('#btn-add').addEventListener("click",  (e) => {
+            displayEmployeeForm();
+        });
+        function displayEmployeeForm(){
             document.querySelector('.layout-blur').style.width = "100vw"; // display blur layout
             document.querySelector('.employee-detail').style.width = "900px"; // display employee-detail
             document.querySelector('.m-dialog').style.width = "100vw"; // display dialog container
             initCustomizedSelect(); // initialize customized select
             document.querySelector('.input-information input').focus(); // Focus to first input
-        });
-
+        }
 
         /* Event for Adding Employee Form */
 
@@ -288,26 +308,70 @@ class Employee extends BaseJs {
                 errorListDialog.style.width = "500px";
             }
         });
-
-        /* Event for button */
-        
-        //Event for save button
-        
-        
-        
+        // Function close Employee Form
         function closeEmployeeForm() {
             let warningCloseDialog = document.querySelector('.popup-warning');
             let popupLayout = document.querySelector('.popup-layout');
             popupLayout.style.width = "100vw";
             warningCloseDialog.style.width = "500px";
-        }    
-
+        }
+        
+        // Event for edit and delete employee
+        let editsButton = $('.employee-table tbody');
+        $(editsButton).on('click','.edit-icon',(e)=>{
+            console.log(e.target.parentElement.parentElement);
+            displayEmployeeForm();
+        })
+    }
+    async renderDataEmployee(res){
+        let thEmployeeTable = $('.employee-table thead th');
+        let tbodyEmployeeTable = $('.employee-table tbody');
+        let size = res.length;
+        // Display to Paging Bar
+        $('.paging-bar .display-employee').text("Hiển thị 1-12/"+size + " nhân viên");
+        // Render Data Employee=
+        $.each(res,(index,obj)=>{
+            let row = $(`<tr></tr>`);
+            $.each(thEmployeeTable,(index,item)=>{
+                let td = $(``);
+                let fieldName = $(item).attr('fieldName');
+                if(index == 0){
+                    td = `<td><img class="edit-icon" src="../icon/edit.png" /><img class="delete-icon" src="../icon/delete.png" /></td>`
+                }else{
+                    td = $(`<td></td>`);
+                    let value = obj[fieldName];
+                    if(fieldName == "DateOfBirth")
+                        value = this.formatDate(value);
+                    else if(fieldName == "Salary")
+                        value = this.formatMoney(value);
+                    else if (fieldName == "WorkStatus"){
+                        if(value == 1){
+                            value = `<input type="checkbox" checked onClick="this.checked=!this.checked;" >`
+                        }else{
+                            value = `<input type="checkbox" onClick="this.checked=!this.checked;" >`
+                        }
+                    }
+                    td.append(value);
+                }
+                $(row).append(td);
+            })
+            tbodyEmployeeTable.append(row);
+        })
+        
     }
     /***
     Class Employee
     Created by tbngoc (1/7/2021)
     ***/
-    loadData() {
+    async loadData() {
+        $.ajax({
+            url : "http://cukcuk.manhnv.net/v1/Employees",
+            method :  "GET"
+        }).done( (res)=>{
+            this.renderDataEmployee(res);
+        }).fail( (rej) => { 
+            console.log(rej);
+        })
 
     }
     /***

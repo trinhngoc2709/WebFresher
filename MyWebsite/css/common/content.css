@@ -33,6 +33,10 @@
             display: inline;
             position: absolute;
         }
+        .content .filter-bar .filter-select .select-custom div{
+            width: 204px;
+            box-sizing: border-box;
+        }
         .content .filter-bar .filter-select:last-of-type{
             margin-left: 214px;
         }

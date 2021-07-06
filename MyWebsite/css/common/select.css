@@ -1,12 +1,11 @@
 .select-custom{
-    display: flex;
+    display: none;
     position: absolute;
     flex-direction: column;
     align-items: center;
     border: none;
-    width: 0px;
-    height: 0px;
     overflow: hidden;
+    z-index: 1;
 }
     .select-custom.dropup{
         position: absolute;
