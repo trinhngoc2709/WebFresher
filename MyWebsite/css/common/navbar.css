@@ -37,14 +37,15 @@
         transition: all 0.3s ease-out;
     }
         .navbar .navbar-content .navbar-item {
-            padding-left: 25px;
-            margin-left: 16px;
+            padding-left: 41px;
             margin-right: 10px;
             height: 44px;
             line-height: 44px;
             background-repeat: no-repeat;
-            background-position: 0px center;
+            background-position: 16px center;
             background-size: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
             .navbar .navbar-content .navbar-item:hover {
                 background-color: #e5e5e5;

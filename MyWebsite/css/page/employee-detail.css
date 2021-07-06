@@ -126,6 +126,11 @@
                     }
                 .employee-detail .employee-detail-content .employee-information .input-information .select-container{
                     position: relative;
+
+                }
+                .employee-detail .employee-detail-content .employee-information .input-information .select-container .option{
+                    width: 304px;
+                    box-sizing: border-box;
                 }
                 .employee-detail .employee-detail-content .employee-information .input-information .icon-input{
                     position: absolute;

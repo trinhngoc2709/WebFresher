@@ -11,19 +11,34 @@
         position: absolute;
         bottom: 40px;
     }
-    .select-custom div{
+    .select-custom .option{
         background-color: #ffffff;
         border: 1px solid #bbbbbb;
         border-radius: 4px;
         z-index: 2;
-        padding-left: 16px;
+        padding-left: 40px;
         padding-right: 16px;
         display: flex;
         align-items: center;
         width: 270px;
         height: 40px;
     }
-        .select-custom div:hover {
+        .select-custom .option:first-of-type{
+            padding-left: 0px;
+        }
+        .select-custom .option *{
+            display: inline-block;
+        }
+        .select-custom .option img{
+            width: 20px;
+            height: 20px;
+            margin: 0px 10px;
+            display: none;
+        }
+        .select-custom .option:first-of-type img{
+            display: inline-block;
+        }
+        .select-custom .option:hover {
             background-color: #E9EBEE;
         }
 .active-option {

@@ -9,6 +9,7 @@
         background: #ffffff;
         font-family: GoogleSans-Regular;
         color: rgb(49, 47, 47);
+        cursor: pointer;
     }
 .input-search {
     padding: 0px 16px;

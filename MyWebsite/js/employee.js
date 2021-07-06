@@ -33,7 +33,9 @@ class Employee extends BaseJs {
         let content = "";
         let errorBlockContent = document.querySelector('.error-content');
         errorBlockContent.innerHTML = "";
-        // Check required field
+
+
+        //Check required field
         let requiredFields = document.querySelectorAll('.input-information .user-input.required');
         requiredFields.forEach(element => {
             if (element.value == "") {
@@ -42,27 +44,63 @@ class Employee extends BaseJs {
                 check = false;
             }
         })
-        // Check only number field
-        let userInputs = document.querySelectorAll('.input-information .user-input:not([type="date"])');
-        userInputs.forEach(element => {
+        let userInputs = $('.input-information .user-input');
+        userInputs.each((index,element)=>{
             let classListElement = element.classList;
             if (classListElement.contains("number-input")) {
                 content = "Thông tin \"số điện thoại\" bị nhập sai";
-                checkValidInput(content, validateFunctions.number, element.value, errorBlockContent) ? true : check = false;
+                console.log($(element).attr("validate"))
+                if(!$(element).attr("validate")){
+                    check = false;
+                    errorBlockContent.appendChild(createErrorContent(content));
+                }
             } else if (classListElement.contains("email-input")) {
                 content = "Thông tin \"email\" bị nhập sai";
-                checkValidInput(content, validateFunctions.email, element.value, errorBlockContent) ? true : check = false;
+                if(!$(element).attr("validate")){
+                    check = false;
+                    errorBlockContent.appendChild(createErrorContent(content));
+                }
             } else if (classListElement.contains("tax-input")) {
                 content = "Thông tin \"mã số thuế\" bị nhập sai";
-                checkValidInput(content, validateFunctions.tax, element.value, errorBlockContent,objScope) ? true : check = false;
+                if(!$(element).attr("validate")){
+                    check = false;
+                    errorBlockContent.appendChild(createErrorContent(content));
+                }
             } else if (classListElement.contains("input-currency")) {
                 content = "Thông tin \"lương cơ bản\" bị nhập sai";
-                checkValidInput(content, validateFunctions.number, element.value.replaceAll('.', ''), errorBlockContent) ? true : check = false;
+                if(!$(element).attr("validate")){
+                    check = false;
+                    errorBlockContent.appendChild(createErrorContent(content));
+                }
             } else if (classListElement.contains("id-input")) {
                 content = "Thông tin \"CMND\" bị nhập sai";
-                checkValidInput(content, validateFunctions.id, element.value, errorBlockContent,objScope) ? true : check = false;
+                if(!$(element).attr("validate")){
+                    check = false;
+                    errorBlockContent.appendChild(createErrorContent(content));
+                }
             }
         })
+        // Check only number field
+        // let userInputs = document.querySelectorAll('.input-information .user-input:not([type="date"])');
+        // userInputs.forEach(element => {
+        //     let classListElement = element.classList;
+        //     if (classListElement.contains("number-input")) {
+        //         content = "Thông tin \"số điện thoại\" bị nhập sai";
+        //         checkValidInput(content, validateFunctions.number, element.value, errorBlockContent) ? true : check = false;
+        //     } else if (classListElement.contains("email-input")) {
+        //         content = "Thông tin \"email\" bị nhập sai";
+        //         checkValidInput(content, validateFunctions.email, element.value, errorBlockContent) ? true : check = false;
+        //     } else if (classListElement.contains("tax-input")) {
+        //         content = "Thông tin \"mã số thuế\" bị nhập sai";
+        //         checkValidInput(content, validateFunctions.tax, element.value, errorBlockContent,objScope) ? true : check = false;
+        //     } else if (classListElement.contains("input-currency")) {
+        //         content = "Thông tin \"lương cơ bản\" bị nhập sai";
+        //         checkValidInput(content, validateFunctions.number, element.value.replaceAll('.', ''), errorBlockContent) ? true : check = false;
+        //     } else if (classListElement.contains("id-input")) {
+        //         content = "Thông tin \"CMND\" bị nhập sai";
+        //         checkValidInput(content, validateFunctions.id, element.value, errorBlockContent,objScope) ? true : check = false;
+        //     }
+        // })
         // check date picker field
         let datePickerField = document.querySelectorAll('.input-information .user-input[type="date"]');
         datePickerField.forEach(element => {
@@ -172,8 +210,10 @@ class Employee extends BaseJs {
             element.addEventListener("keyup", (e) => {
                 if (!this.checkValidNumber(e.target.value) && e.target.value != "") {
                     displayError(e.target);
+                    $(e.target).attr("validate",false);
                 } else {
                     removeError(e.target);
+                    $(e.target).attr("validate",true);
                 }
                 if (((e.keyCode >= 96 && e.keyCode <= 105) || (e.keyCode >= 48 && e.keyCode <= 57)) && element.classList.contains("input-currency"))
                     element.value = this.formatMoney(element.value);
@@ -186,8 +226,10 @@ class Employee extends BaseJs {
         emailInput.addEventListener("keyup", (e) => {
             if (!this.validateEmail(e.target.value) && e.target.value != "") {
                 displayError(e.target);
+                $(e.target).attr("validate",false);
             } else {
                 removeError(e.target);
+                $(e.target).attr("validate",true);
             }
         });
         focusEvent(emailInput, this.validateEmail);
@@ -196,8 +238,10 @@ class Employee extends BaseJs {
         idInput.addEventListener("keyup", (e) => {
             if (!this.checkIdNumber(e.target.value) && e.target.value != "") {
                 displayError(e.target);
+                $(e.target).attr("validate",false);
             } else {
                 removeError(e.target);
+                $(e.target).attr("validate",true);
             }
         });
         focusEvent(idInput, this.checkIdNumber,this);
@@ -206,8 +250,10 @@ class Employee extends BaseJs {
         taxInput.addEventListener("keyup", (e) => {
             if (!this.checkTaxNumber(e.target.value) && e.target.value != "") {
                 displayError(e.target);
+                $(e.target).attr("validate",false);
             } else {
                 removeError(e.target);
+                $(e.target).attr("validate",true);
             }
         });
         focusEvent(taxInput, this.checkTaxNumber,this);
@@ -323,7 +369,7 @@ class Employee extends BaseJs {
             displayEmployeeForm();
         })
     }
-    async renderDataEmployee(res){
+    renderDataEmployee(res){
         let thEmployeeTable = $('.employee-table thead th');
         let tbodyEmployeeTable = $('.employee-table tbody');
         let size = res.length;

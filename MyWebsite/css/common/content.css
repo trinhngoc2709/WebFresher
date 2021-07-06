@@ -33,8 +33,8 @@
             display: inline;
             position: absolute;
         }
-        .content .filter-bar .filter-select .select-custom div{
-            width: 204px;
+        .content .filter-bar .filter-select .select-custom .option{
+            width: 210px;
             box-sizing: border-box;
         }
         .content .filter-bar .filter-select:last-of-type{
@@ -46,6 +46,7 @@
             height: 20px;
             right: 0px;
             top: 14.31px;
+            pointer-events: none;
         }
     /* Paging Bar */
     .content .paging-bar{
