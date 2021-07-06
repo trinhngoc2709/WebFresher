@@ -137,19 +137,21 @@ class BaseJs {
         /* Event for Customize Select */
         
         // Add event click to display customized select
-        let customizedSelects = document.querySelectorAll('.select-container');
-        customizedSelects.forEach(element => {
+        
+        let customizedSelects = $('.select-container');
+        customizedSelects.each(function(index,element){
             // click event : display customized select, rotate input icon
-            element.addEventListener("click", () => {
-                displayCustomizedSelect(element.childNodes[3]);
+            $(element).click(()=>{
+                let selectCustom = $(element).find('.select-custom');
+                displayCustomizedSelect(selectCustom);
                 let iconInput = element.querySelector('.icon-input');
-                rotateIconinput(iconInput);
-            });
+                rotateIconInput(iconInput);
+            })
             // Focus out : Hide the customized select, rotate input icon
             element.addEventListener("focusout",()=>{
                 let iconInput = element.querySelector('.icon-input');
                 if(iconInput.style.transform != ""){
-                    rotateIconinput(iconInput);
+                    rotateIconInput(iconInput);
                     displayCustomizedSelect(element.childNodes[3]);
                 }
             })
@@ -159,7 +161,7 @@ class BaseJs {
                 let options = e.target.parentElement.childNodes[3].children;
                 if (e.code === "Enter") {// Enter event : display customized select, rotate the input
                     let iconInput = e.target.parentElement.querySelector('.icon-input');
-                    rotateIconinput(iconInput);
+                    rotateIconInput(iconInput);
                     displayCustomizedSelect(customizedSelect);
                 } else if (e.code == "ArrowUp") {// ArrowUp event : change the option
                     if (customizedSelect.style.display == "block") {
@@ -173,7 +175,7 @@ class BaseJs {
             });
         })
         // Rotate 180 degree the element
-        function rotateIconinput (iconInput) {
+        function rotateIconInput (iconInput) {
             if(iconInput.style.transform == ""){
                 // Rotate drop down
                 iconInput.style.transform = "rotate(180deg)";
@@ -193,8 +195,7 @@ class BaseJs {
                let optionSiblings = $(element).siblings();
                $(optionSiblings).removeClass('active-option');
                $(this).addClass('active-option');
-               console.log($(this).parent().parent())
-               $(this).parent().parent().val($(this).text());
+               $(this).parent().parent().find('input').val($(this).text());
             })
             // let iconInput = element.parentElement.parentElement.querySelector('.icon-input');
             // element.addEventListener("mousedown", (e) => {
@@ -205,7 +206,7 @@ class BaseJs {
             //     })
             //     e.target.classList.add('active-option');
             //     e.target.parentElement.parentElement.childNodes[1].value = e.target.textContent;
-            //     rotateIconinput(iconInput);
+            //     rotateIconInput(iconInput);
             // })
         });
         // Function display/hide customized select
