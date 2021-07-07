@@ -17,7 +17,7 @@
     opacity: 0.5;
 }
 
-.popup-warning {
+.popup-warning,.popup-confirmation{
     display: none;
     width: 500px; /* width display: 500px */
     height: 191px;
@@ -25,7 +25,7 @@
     border-radius: 4px;
     overflow: hidden;
 }
-    .popup-warning .close-button {
+    .popup-warning .close-button ,.popup-confirmation .close-button{
         width: 20px;
         height: 20px;
         padding: 10px;
@@ -34,7 +34,7 @@
         top: 0px;
     }
 
-        .popup-warning .close-button:hover {
+        .popup-warning .close-button:hover,.popup-confirmation .close-button:hover {
             background-color: #e5e5e5;
         }
 
@@ -50,6 +50,9 @@
     margin-top: 0px;
     display: flex;
     font-size: 13px;
+}
+.popup-confirmation .popup-content .content-warning{
+    align-self: center;
 }
 
 .icon-warning {

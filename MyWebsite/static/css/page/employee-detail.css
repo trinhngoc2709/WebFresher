@@ -27,7 +27,7 @@
         position: absolute;
         width: 100%;
         background-color: #e9ebee;
-        height: calc(100% - 686px - 73px);
+        height: calc(100% - 747px);
         display: flex;
         justify-content: flex-end;
         align-items: center;
@@ -119,7 +119,8 @@
                     margin-bottom: 5px;
                 }
                 .employee-detail .employee-detail-content .employee-information .input-information input{
-                    width: 270px;
+                    width: 304px;
+                    box-sizing: border-box;
                 }
                     .employee-detail .employee-detail-content .employee-information .input-information input:focus {
                         border-color: #019160 ;
@@ -133,11 +134,7 @@
                     box-sizing: border-box;
                 }
                 .employee-detail .employee-detail-content .employee-information .input-information .icon-input{
-                    position: absolute;
-                    width: 20px;
-                    height: 20px;
-                    right: 0px;
-                    top: 14.31px;
+                    position: relative;
                 }
 
 .block{

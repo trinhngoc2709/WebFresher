@@ -12,7 +12,7 @@
 }
     .select-custom.dropup{
         position: absolute;
-        bottom: 82px;
+        top: -95px;
     }
     .select-custom .option{
         background-color: #ffffff;

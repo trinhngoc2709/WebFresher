@@ -2,46 +2,21 @@ class Input {
     constructor() {
 
     }
-
-    ldEvtIconInput(){
-        let userInputs = $('.user-input');
-        $(userInputs).each((index,element)=>{
-            $(element).on("keyup",()=>{
-                let parentElement = "";
-                if($(element).hasClass("input-currency")) 
-                    parentElement = $(element).parent().parent();
-                else 
-                    parentElement = $(element).parent();
-                if($(element).val().length == 0){
-                    parentElement.find('.x-icon').hide();
-                }else{
-                    parentElement.find('.x-icon').show();
-                }
-            })
+    ldEvtImgInput() {
+        // Event upload image of employee
+        let inputImg = $('.employee-detail .employee-detail-content input');
+        let uploadImg = document.querySelector('#upload-img');
+        $(inputImg).on('change', function () {
+            if (this.files && this.files[0])
+                uploadImg.src = URL.createObjectURL(this.files[0]);
         })
-        let iconDeleteInput = $('.x-icon');
-        $(iconDeleteInput).each((index,element)=>{
-            $(element).click((e)=>{
-                $(element).parent().find('.user-input').val("");
-                $(element).parent().find('.user-input').focus();
-                $(element).hide();
-
-                let options = $(element).parent().find('.option');
-                console.log(options);
-                $(options).each((index,element1)=>{
-                    $(element1).parent().parent().find('img').hide();
-                    $(element1).removeClass("active-option")
-                    $(element1).removeClass("padding-left-0")
-                    $(element1).addClass("padding-left-40")
-                })
-                // Propagate the click event to parent to check the error
-            })
+        $(uploadImg).click(function (e) {
+            inputImg.click();
         })
     }
-
     ldEvtValidIptField(objScope) {
         // Check valid number input field
-        let numberInputs = $('.number-input');
+        let numberInputs = $('.number-input,.input-currency');
         numberInputs.each((index, element) => {
             // Event key up for element
             $(element).on("keyup", (e) => {
@@ -72,7 +47,7 @@ class Input {
         focusEvent(emailInput, objScope.validateEmail);
         // Check valid  ID input field
         let idInput = $('.id-input');
-        $(idInput).on("keyup",(e)=>{
+        $(idInput).on("keyup", (e) => {
             if (!objScope.checkIdNumber($(e.target).val()) && $(e.target).val() != "") {
                 displayError(e.target);
                 $(e.target).attr("validate", false);
@@ -108,14 +83,14 @@ class Input {
         function focusEvent(e, functionCheck, objScope) {
             $(e).on({
                 focusout: (e1) => {
-                    if ( !$(e1.target).parent().find(".wrong-input").length)
+                    if (!$(e1.target).parent().find(".wrong-input").length)
                         $(e1.target).css("border-color", "#bbbbbb");
                 },
                 focusin: (e1) => {
                     if (!functionCheck($(e1.target).val(), objScope) && $(e1.target).val() != "") {
                         displayError(e1.target);
-                        $(e1.target).css("border-color","#ff4747");
-                    }else{
+                        $(e1.target).css("border-color", "#ff4747");
+                    } else {
                         removeError(e1.target);
                     }
                 }

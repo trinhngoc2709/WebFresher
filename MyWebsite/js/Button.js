@@ -6,17 +6,18 @@ class Button {
     initCustomizedSelect() {
         // Clear the user's input and initialize the value for select 
         let inputs = document.querySelectorAll('.employee-detail .employee-detail-content .employee-information .input-information .select-container input');
-        inputs[0].value = "Nam";
-        inputs[1].value = "Giám đốc";
-        inputs[2].value = "Phòng nhân sự";
-        inputs[3].value = "Đang làm việc";
         let userInputs = document.querySelectorAll('.input-information .user-input');
         userInputs.forEach(element => {
             element.value = "";
         })
+        inputs[0].value = "Nam";
+        inputs[1].value = "Phòng Đào tạo";
+        inputs[2].value = "Phòng Marketting";
+        inputs[3].value = "Đang làm việc";
     }
+    
     toggleEmployeeForm() {
-        let defaultAvatar = "../img/default-avatar.jpg";
+        let defaultAvatar = "../static/img/default-avatar.jpg";
         $('.layout-blur').slideToggle(300, "linear")  // Layout blur
         $('.employee-detail').slideToggle(300, "linear") // Employee Detail Form
         $('.m-dialog').slideToggle(300, "linear") // Dialog Container
@@ -34,6 +35,62 @@ class Button {
         $('.popup-warning').slideToggle(300, "swing")
         $('.popup-layout').slideToggle(300, "swing")
     }
+    // Function for toggleConfirmationPopup
+    toggleConfirmationPopup() {
+        $('.m-dialog').slideToggle(300, "linear")
+        $('.popup-confirmation').slideToggle(300, "swing")
+        $('.popup-layout').slideToggle(300, "swing")
+    }
+    ldEvtModifyEmployeeButton(objScope){
+        // Event for edit and delete employee
+        let employeeTable = $('.employee-table tbody');
+        $(employeeTable).on('click','.edit-icon',(e)=>{
+            this.toggleEmployeeForm();
+            let objEmployee ={};
+            $(e.target).parent().siblings().each((index, element)=>{
+                if(!$(element).attr('fieldName') == "DateOfBirth")
+                    objEmployee[$(element).attr('fieldName')] = $(element).text();
+                else if ($(element).attr('fieldName') == "WorkStatus"){
+                    console.log($(element).attr('value'))
+                     objEmployee[$(element).attr('fieldName')] = (($(element).attr('value') != "null") ? "Đang làm việc" : "Đã nghỉ việc");
+                }
+                else
+                    objEmployee[$(element).attr('fieldName')] = $(element).text().split("/").reverse().join("-");
+            })
+            $('.employee-detail input').each((index,element)=>{
+                if(objEmployee[$(element).attr('fieldName')]){
+                    $(element).val(objEmployee[$(element).attr('fieldName')])
+                }
+            })
+            console.log(objEmployee);
+        })
+        let employeeCode = "";
+        $(employeeTable).on('click','.delete-icon',(e)=>{
+           this.toggleConfirmationPopup();
+           employeeCode = $(e.target).parent().siblings().first().text();
+        })
+        let confirmButtonConfirmation = $('.popup-confirmation button:first-of-type');
+           $(confirmButtonConfirmation).click(() => {
+            this.toggleConfirmationPopup();
+            $.ajax({
+                url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1&employeeCode=" + employeeCode ,
+                method: "GET",
+                success: (data) => {
+                    let employeeId = data.Data[0].EmployeeId
+                    $.ajax({
+                        url : "http://cukcuk.manhnv.net/v1/Employees/" + employeeId,
+                        method: "DELETE",
+                        success: (data) => {
+                            $('.m-button-refresh').trigger('click');
+                            // Check Status Please complete
+                        }
+                    })
+
+                }
+            })
+        })
+    }
+
     ldEvtSaveButton(objScope) {
         // Event for save information of new employee
         $('#btn-save').click(() => {
@@ -61,10 +118,6 @@ class Button {
 
     }
     ldEvtCloseButton() {
-        // Close the error popup 1
-        $('.popup-list .close-button').click(() => {
-            this.toggleErrorPopup();
-        });
         //Blur Background click event except dialog 
         $('.layout-blur').click(() => {
             this.toggleWarningPopup();
@@ -84,18 +137,25 @@ class Button {
         let closeButtonError1 = $('.popup-list img.close-button');
         let closeButtonWarning = $('.popup-warning img.close-button');
         let continueInputButton = $('.popup-warning .popup-footer button:first-of-type');
+        let closeButtonConfirmation = $('.popup-confirmation img.close-button');
+        
+        let cancelButtonConfirmation = $('.popup-confirmation button:last-of-type');
 
         // Close employee detail form
         $(closeButton).click(() => {
             this.toggleWarningPopup();
             this.toggleEmployeeForm();
         })
-        $(closeButtonWarning,continueInputButton).click(() => {
+        $(closeButtonWarning).add($(continueInputButton)).click(() => {
             this.toggleWarningPopup();
         })
-        $(closeButtonError, closeButtonError1).click(() => {
+        $(closeButtonError).add($(closeButtonError1)).click(() => {
             this.toggleErrorPopup();
         })
+        $(cancelButtonConfirmation).add($(closeButtonConfirmation)).click(()=>{
+            this.toggleConfirmationPopup();
+        })
+        
     }
     ldEvtResizeButton() {
         // Event for resize button 

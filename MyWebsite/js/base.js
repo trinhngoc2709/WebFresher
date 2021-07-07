@@ -55,7 +55,7 @@
      Check Tax Number
      * **/
     checkTaxNumber(taxString, objScope) {
-        if (this) {
+        if (this instanceof Employee) {
             if (taxString) {
                 let toNumberTax = parseInt(taxString, 10);
                 if (String(taxString).length != 10 || (!this.checkValidNumber(taxString)) ||
@@ -78,7 +78,7 @@
      Check identity number
      * **/
     checkIdNumber(idString, objScope) {
-        if (this) {
+        if (this instanceof Employee) {
             if (idString && this.checkValidNumber(idString) && (idString.length == 9 || idString.length == 12)) {
                 return true;
             }
