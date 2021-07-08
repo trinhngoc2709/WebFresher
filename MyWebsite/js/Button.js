@@ -134,6 +134,7 @@ class Button {
                             return value
                     })
                     objEmployee["DepartmentCode"] = department[0].DepartmentCode;
+                    objEmployee["DepartmentId"] = department[0].DepartmentId;
                 })
                 // Get Position Code
                 $.ajax({
@@ -145,6 +146,7 @@ class Button {
                             return value
                     })
                     objEmployee["PositionCode"] = department[0].PositionCode;
+                    objEmployee["PositionId"] = department[0].PositionId;
                 })
 
                 console.log(objEmployee)
@@ -153,6 +155,7 @@ class Button {
                     method: "POST",
                     data: JSON.stringify(objEmployee),
                     contentType: "application/json; charset=utf-8",
+                    type: "json"
                 }).done((res) => {
                     if(res)
                         console.log("Thêm thành công ")
