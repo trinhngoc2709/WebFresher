@@ -38,7 +38,7 @@ class Employee extends BaseJs {
                     data.forEach((e) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content ">` + e.DepartmentName + `</div>
+                        <div class="option-content none-pointer">` + e.DepartmentName + `</div>
                         </div>`
                         $(element).append(option);
                     })
@@ -54,7 +54,7 @@ class Employee extends BaseJs {
                     data.forEach((e) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content ">` + e.PositionName + `</div>
+                        <div class="option-content none-pointer" >` + e.PositionName + `</div>
                         </div>`
                         $(element).append(option);
                     })

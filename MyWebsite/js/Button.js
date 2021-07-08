@@ -14,6 +14,20 @@ class Button {
         inputs[1].value = "Phòng Đào tạo";
         inputs[2].value = "Phòng Marketting";
         inputs[3].value = "Đang làm việc";
+        let datePickerField = document.querySelectorAll('.input-information input[type="date"]');
+        datePickerField.forEach(element => {
+            element.value = ""
+        })
+        $.ajax({
+            url: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+            method: "GET",
+            success: function (data) {
+                $('.employee-detail input[fieldname="EmployeeCode"]').val(data)
+            },
+            error: function (data) {
+                console.log("Lỗi")
+            }
+        })
     }
     
     toggleEmployeeForm() {
@@ -41,28 +55,29 @@ class Button {
         $('.popup-confirmation').slideToggle(300, "swing")
         $('.popup-layout').slideToggle(300, "swing")
     }
-    ldEvtModifyEmployeeButton(objScope){
+    async ldEvtModifyEmployeeButton(objScope){
         // Event for edit and delete employee
         let employeeTable = $('.employee-table tbody');
-        $(employeeTable).on('click','.edit-icon',(e)=>{
+        $(employeeTable).on('click', '.edit-icon', (e) => {
             this.toggleEmployeeForm();
-            let objEmployee ={};
-            $(e.target).parent().siblings().each((index, element)=>{
-                if(!$(element).attr('fieldName') == "DateOfBirth")
-                    objEmployee[$(element).attr('fieldName')] = $(element).text();
-                else if ($(element).attr('fieldName') == "WorkStatus"){
-                    console.log($(element).attr('value'))
-                     objEmployee[$(element).attr('fieldName')] = (($(element).attr('value') != "null") ? "Đang làm việc" : "Đã nghỉ việc");
-                }
-                else
-                    objEmployee[$(element).attr('fieldName')] = $(element).text().split("/").reverse().join("-");
-            })
-            $('.employee-detail input').each((index,element)=>{
-                if(objEmployee[$(element).attr('fieldName')]){
-                    $(element).val(objEmployee[$(element).attr('fieldName')])
-                }
-            })
-            console.log(objEmployee);
+            setTimeout(() => {
+                let objEmployee = {};
+                $(e.target).parent().siblings().each((index, element) => {
+                    if (!$(element).attr('fieldName') == "DateOfBirth")
+                        objEmployee[$(element).attr('fieldName')] = $(element).text();
+                    else if ($(element).attr('fieldName') == "WorkStatus") {
+                        objEmployee[$(element).attr('fieldName')] = (($(element).attr('value') != "null") ? "Đang làm việc" : "Đã nghỉ việc");
+                    }
+                    else
+                        objEmployee[$(element).attr('fieldName')] = $(element).text().split("/").reverse().join("-");
+                })
+                $('.employee-detail input').each((index, element) => {
+                    if (objEmployee[$(element).attr('fieldName')]) {
+                        $(element).val(objEmployee[$(element).attr('fieldName')])
+                    }
+                })
+            }, 10)
+            
         })
         let employeeCode = "";
         $(employeeTable).on('click','.delete-icon',(e)=>{
@@ -92,10 +107,51 @@ class Button {
     }
 
     ldEvtSaveButton(objScope) {
+        let x = $('.employee-detail input').filter((index, element) => $(element).attr("fieldname") != undefined)
         // Event for save information of new employee
         $('#btn-save').click(() => {
-            if (objScope.checkValidInputs(objScope)) {
-                alert("Lưu thành công");
+            if (objScope.checkValidInputs(objScope) || true) {
+                
+                let objEmployee = {
+                    createdDate: "2021-07-08T01:33:21.541Z",
+                    createdBy: "string",
+                    modifiedDate: "2021-07-08T01:33:21.541Z",
+                    modifiedBy: "string",
+                    employeeCode: "string",
+                    firstName: "string",
+                    lastName: "string",
+                    fullName: "string",
+                    gender: 0,
+                    dateOfBirth: "2021-07-08T01:33:21.541Z",
+                    phoneNumber: "string",
+                    email: "string",
+                    address: "string",
+                    identityNumber: "string",
+                    identityDate: "2021-07-08T01:33:21.541Z",
+                    identityPlace: "string",
+                    joinDate: "2021-07-08T01:33:21.541Z",
+                    martialStatus: 0,
+                    educationalBackground: 0,
+                    qualificationId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    departmentId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    positionId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                    workStatus: 0,
+                    personalTaxCode: "string",
+                    salary: 0,
+                    positionCode: "string",
+                    positionName: "string",
+                    departmentCode: "string",
+                    departmentName: "string",
+                    qualificationName: "string"
+                }
+                $.ajax({
+                    url: "http://cukcuk.manhnv.net/v1/Employees",
+                    method: "POST",
+                    data: JSON.stringify(objEmployee),
+                    contentType: "application/json; charset=utf-8",
+                }).done(() => {
+                    console.log("Thêm thành công ")
+                })
                 this.initCustomizedSelect();
             } else {
                 $('.popup-layout').slideToggle(300, "linear");

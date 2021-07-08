@@ -85,11 +85,13 @@ button{
 .x-icon.currency-icon{
     right: 0;
     left: 16px;
-    z-index: 1;
 }
 .combobox{
-    width: 200px;
+    width: 250px;
     padding-right: 72px;
+}
+.none-pointer{
+    pointer-events: none;
 }
 @font-face {
     font-family: 'GoogleSans-Bold';

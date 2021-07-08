@@ -102,9 +102,10 @@ class Dropdown {
         let options = document.querySelectorAll('.select-container .select-custom .option'); // options
         $('.select-container .select-custom').on('mousedown', '.option', function (element) {
             let parentElement = $(this).parent().parent();
-
             // Turn the sibling options to default
             let optionSiblings = $(element.target).siblings();
+
+            //console.log(optionSiblings)
             $(optionSiblings).find('img').hide();
             $(optionSiblings).removeClass('active-option');
             $(optionSiblings).removeClass("padding-left-0");

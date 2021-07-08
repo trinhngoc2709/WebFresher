@@ -17,10 +17,7 @@
             return money.toString().replaceAll('.', '').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
         } else return "0";
     }
-    /***
-     Created by tbNgoc at 30/06/2021
-     Format VND money string 
-     * **/
+    
     formatDate(date) {
         if (date) {
             let date = new Date();
@@ -32,17 +29,17 @@
             return day + '/' + month + '/' + year;
         } else return "";
     }
-    /***
-     Created by tbNgoc at 30/06/2021
-     Check valid number
-     * **/
+    /**
+     * 
+     * @param {String} str
+     */
     checkValidNumber(str) {
         return /^\d+$/.test(str.replaceAll('.', ''));
     }
-    /***
-     Created by tbNgoc at 30/06/2021
-     Validate the email
-     * **/
+    /**
+     * 
+     * @param {String} email
+     */
     validateEmail(email) {
         if (email) {
             const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -50,10 +47,12 @@
         } else return false;
 
     }
-    /***
-     Created by tbNgoc at 30/06/2021
-     Check Tax Number
-     * **/
+    /**
+     * 
+     * @param {String} taxString 
+     * @param {any} objScope
+     * Created by tbngoc 
+     */
     checkTaxNumber(taxString, objScope) {
         if (this instanceof Employee) {
             if (taxString) {
@@ -73,10 +72,14 @@
             } else return false;
         }
     }
-    /***
-     Created by tbNgoc at 30/06/2021
-     Check identity number
-     * **/
+
+    /**
+     * 
+     * @param {String} idString
+     * @param {any} objScope
+     * @Created by tbNgoc at 30/06/2021
+     * @Check identity number
+     */
     checkIdNumber(idString, objScope) {
         if (this instanceof Employee) {
             if (idString && this.checkValidNumber(idString) && (idString.length == 9 || idString.length == 12)) {

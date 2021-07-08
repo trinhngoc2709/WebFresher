@@ -41,11 +41,11 @@
             position: absolute;
         }
         .content .filter-bar .filter-select .select-custom .option{
-            width: 200px;
+            width: 250px;
             box-sizing: border-box;
         }
         .content .filter-bar .filter-select:last-of-type{
-            margin-left: 214px;
+            margin-left: 264px;
         }
         .content .filter-bar .filter-select .icon-input{
             position: relative;
