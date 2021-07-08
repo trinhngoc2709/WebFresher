@@ -18,16 +18,18 @@ class Button {
         datePickerField.forEach(element => {
             element.value = ""
         })
-        $.ajax({
-            url: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
-            method: "GET",
-            success: function (data) {
-                $('.employee-detail input[fieldname="EmployeeCode"]').val(data)
-            },
-            error: function (data) {
-                console.log("Lỗi")
-            }
-        })
+        setTimeout(() => {
+            $.ajax({
+                url: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+                method: "GET",
+                success: function (data) {
+                    $('.employee-detail input[fieldname="EmployeeCode"]').val(data)
+                },
+                error: function (data) {
+                    console.log("Lỗi")
+                }
+            })
+        },200)
     }
     
     toggleEmployeeForm() {
@@ -55,7 +57,7 @@ class Button {
         $('.popup-confirmation').slideToggle(300, "swing")
         $('.popup-layout').slideToggle(300, "swing")
     }
-    async ldEvtModifyEmployeeButton(objScope){
+    ldEvtModifyEmployeeButton(objScope){
         // Event for edit and delete employee
         let employeeTable = $('.employee-table tbody');
         $(employeeTable).on('click', '.edit-icon', (e) => {
@@ -107,50 +109,55 @@ class Button {
     }
 
     ldEvtSaveButton(objScope) {
-        let x = $('.employee-detail input').filter((index, element) => $(element).attr("fieldname") != undefined)
         // Event for save information of new employee
         $('#btn-save').click(() => {
             if (objScope.checkValidInputs(objScope) || true) {
-                
-                let objEmployee = {
-                    createdDate: "2021-07-08T01:33:21.541Z",
-                    createdBy: "string",
-                    modifiedDate: "2021-07-08T01:33:21.541Z",
-                    modifiedBy: "string",
-                    employeeCode: "string",
-                    firstName: "string",
-                    lastName: "string",
-                    fullName: "string",
-                    gender: 0,
-                    dateOfBirth: "2021-07-08T01:33:21.541Z",
-                    phoneNumber: "string",
-                    email: "string",
-                    address: "string",
-                    identityNumber: "string",
-                    identityDate: "2021-07-08T01:33:21.541Z",
-                    identityPlace: "string",
-                    joinDate: "2021-07-08T01:33:21.541Z",
-                    martialStatus: 0,
-                    educationalBackground: 0,
-                    qualificationId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    departmentId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    positionId: "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-                    workStatus: 0,
-                    personalTaxCode: "string",
-                    salary: 0,
-                    positionCode: "string",
-                    positionName: "string",
-                    departmentCode: "string",
-                    departmentName: "string",
-                    qualificationName: "string"
-                }
+                let objEmployee = {}
+                let inputUpload = $('.employee-detail input').filter((index, element) => $(element).attr("fieldname") != undefined)
+                $(inputUpload).each((index, element)=>{
+                    if($(element).attr("fieldname") == "WorkStatus")
+                        objEmployee[$(element).attr('fieldName')] = $(element).val() == "Đang làm việc" ? 1 : 0
+                    else if($(element).attr("fieldname") == "GenderName"){
+                        objEmployee.Gender = $(element).val() == "Nam" ? 1 : ($(element).val() == "Nữ" ? 2 : 3) 
+                        objEmployee[$(element).attr('fieldName')] = $(element).val();
+                    }
+                    else  
+                        objEmployee[$(element).attr('fieldName')] = $(element).val().replaceAll('.', '');
+                })
+                // Get Department Code 
+                $.ajax({
+                    url : "http://cukcuk.manhnv.net/api/Department",
+                    method: "GET",
+                }).done((data)=>{
+                    let department = data.filter((value, index)=>{
+                        if(value.DepartmentName == objEmployee.DepartmentName)
+                            return value
+                    })
+                    objEmployee["DepartmentCode"] = department[0].DepartmentCode;
+                })
+                // Get Position Code
+                $.ajax({
+                    url : "http://cukcuk.manhnv.net/v1/Positions",
+                    method: "GET",
+                }).done((data)=>{
+                    let department = data.filter((value, index)=>{
+                        if(value.PositionName == objEmployee.PositionName)
+                            return value
+                    })
+                    objEmployee["PositionCode"] = department[0].PositionCode;
+                })
+
+                console.log(objEmployee)
                 $.ajax({
                     url: "http://cukcuk.manhnv.net/v1/Employees",
                     method: "POST",
                     data: JSON.stringify(objEmployee),
                     contentType: "application/json; charset=utf-8",
-                }).done(() => {
-                    console.log("Thêm thành công ")
+                }).done((res) => {
+                    if(res)
+                        console.log("Thêm thành công ")
+                    else 
+                        console.log("Thêm thất bại")
                 })
                 this.initCustomizedSelect();
             } else {

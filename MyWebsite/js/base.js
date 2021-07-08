@@ -20,10 +20,11 @@
     
     formatDate(date) {
         if (date) {
-            let date = new Date();
-            let day = date.getDay(),
-                month = date.getMonth() + 1,
-                year = date.getFullYear();
+            let _date = new Date(date);
+           
+            let day = _date.getDate(),
+                month = _date.getMonth() + 1,
+                year = _date.getFullYear();
             day = day < 10 ? '0' + day : day;
             month = month < 10 ? '0' + month : month;
             return day + '/' + month + '/' + year;
