@@ -134,12 +134,14 @@ class Dropdown {
         function displayOption(options, keyCode, inputField) {
             let currentIndex = -1;
             let maxIndex = options.length;
+            // Find the index of current chosen option
             for (const option of options) {
                 if ($(option).hasClass("active-option")) {
                     currentIndex = Array.prototype.indexOf.call(options, option)
                     break;
                 }
             }
+            // Remove properties of the current chosen option and add them into the new one
             if (keyCode == "ArrowDown") {
                 if (currentIndex + 1 < maxIndex) {
                     if (currentIndex != -1) {
@@ -173,5 +175,16 @@ class Dropdown {
                 }
             }
         }
+    }
+    /**
+     * 
+     */
+    lvEvtDropDownChoosing(){
+        $('.content .select-custom.department').on('click','.option',()=>{
+            let dpId = $(this).attr('dpId');
+            let url = "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&pageNumber=1&employeeCode=NV&departmentId=" + dpId;
+            $('.employee-table tbody').empty();
+            
+        })
     }
 }

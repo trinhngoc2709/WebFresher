@@ -38,8 +38,11 @@ class Employee extends BaseJs {
                     data.forEach((e) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content none-pointer">` + e.DepartmentName + `</div>
-                        </div>`
+                        <div class="option-content none-pointer" dpId="`+ e.DepartmentId +`">` + e.DepartmentName + `</div>
+                        </div>`;
+                        console.log(typeof option)
+                        $(option).data("departmentInformation",e)
+                        console.log($(option).data("departmentInformation"))
                         $(element).append(option);
                     })
                 })
@@ -54,7 +57,7 @@ class Employee extends BaseJs {
                     data.forEach((e) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content none-pointer" >` + e.PositionName + `</div>
+                        <div class="option-content none-pointer" psId="`+e.PositionId+`">` + e.PositionName + `</div>
                         </div>`
                         $(element).append(option);
                     })
@@ -201,14 +204,15 @@ class Employee extends BaseJs {
         this.inputObj.ldEvtImgInput();
         /* Event for employee tab in homepage */
         this.initCombobox(); // init combobox
+        this.dropdownObj.lvEvtDropDownChoosing();
     }
-    renderDataEmployee(res) {
+    static renderDataEmployee(res,objScope) {
         let thEmployeeTable = $('.employee-table thead th');
         let tbodyEmployeeTable = $('.employee-table tbody');
         let size = res.length;
         // Display to Paging Bar
         $('.paging-bar .display-employee').text("Hiển thị 1-12/" + size + " nhân viên");
-        // Render Data Employee=
+        // Render Data Employee
         $.each(res, (index, obj) => {
             let row = $(`<tr></tr>`);
             $.each(thEmployeeTable, (index, item) => {
@@ -220,9 +224,9 @@ class Employee extends BaseJs {
                     let value = obj[fieldName];
                     td = $(`<td fieldName="` + fieldName + `"></td>`);
                     if (fieldName == "DateOfBirth")
-                        value = this.formatDate(value);
+                        value = objScope.formatDate(value);
                     else if (fieldName == "Salary")
-                        value = this.formatMoney(value);
+                        value = objScope.formatMoney(value);
                     else if (fieldName == "WorkStatus") {
                         td = $(`<td fieldName="` + fieldName + `" value=` + value + `></td>`);
                         if (value != null) {
@@ -248,7 +252,7 @@ class Employee extends BaseJs {
             url: "http://cukcuk.manhnv.net/v1/Employees",
             method: "GET",
             success: (data) => {
-                this.renderDataEmployee(data);
+                Employee.renderDataEmployee(data,this);
             }
         })
     }
