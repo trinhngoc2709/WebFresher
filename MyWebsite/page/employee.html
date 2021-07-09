@@ -66,7 +66,7 @@
         <div class="content-header">
             <div class="title">Danh sách nhân viên</div>
             <div class="content-feature">
-                <button id="btn-add" class="m-default-button">
+                <button id="btn-employee-add" class="m-default-button">
                     <div class="button-icon"></div>
                     <div class="button-name">Thêm nhân viên </div>
                 </button>
@@ -82,7 +82,7 @@
                     <div class="x-icon combobox-icon"></div>
                     <input class="combobox user-input" type="text" />
                     <div class="select-custom department">
-                        <div class="option">
+                        <div class="option" dpId="">
                             <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                             <div class="option-content none-pointer">Tất cả phòng ban</div>
                         </div>
@@ -93,7 +93,7 @@
                     <div class="x-icon combobox-icon"></div>
                     <input class="combobox user-input" type="text" />
                     <div class="select-custom position">
-                        <div class="option">
+                        <div class="option" psId="">
                             <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                             <div class="option-content none-pointer">Tất cả vị trí</div>
                         </div>
@@ -103,7 +103,7 @@
                 
             </div>
             <div class="filter-right">
-                <button class="m-button-refresh">
+                <button class="m-button-refresh employee">
                 </button>
             </div>
         </div>
@@ -322,7 +322,7 @@
             </div>
             <div class="footer">
                 <button class="cancel">Hủy</button>
-                <button id="btn-save">
+                <button id="btn-employee-save">
                     Lưu
                 </button>
             </div>
@@ -380,6 +380,11 @@
     <script src="../../js/Navbar.js"></script>
     <script src="../../js/Button.js"></script>
     <script src="../../js/Input.js"></script>
+    <script src="../js/elements/inputClass.js"></script>
+    <script src="../js/elements/combobox.js"></script>
+    <script src="../js/elements/toggle.js"></script>
+    <script src="../js/elements/popup.js"></script>
+    <script src="../js/elements/buttonClass.js"></script>
 </body>
 
 </html>

@@ -36,14 +36,13 @@ class Employee extends BaseJs {
             success: function(data) {
                 $(".select-custom.department").each((index, element) => {
                     data.forEach((e) => {
-                        let option = `<div class="option">
+                        let option = `<div class="option"">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content none-pointer" dpId="`+ e.DepartmentId +`">` + e.DepartmentName + `</div>
+                        <div class="option-content none-pointer">` + e.DepartmentName + `</div>
                         </div>`;
-                        console.log(typeof option)
-                        $(option).data("departmentInformation",e)
-                        console.log($(option).data("departmentInformation"))
+                        //console.log($(option).data("departmentInformation"))
                         $(element).append(option);
+                        $(element).find(".option").last().data("departmentInformation",e);
                     })
                 })
             }
@@ -57,11 +56,13 @@ class Employee extends BaseJs {
                     data.forEach((e) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
-                        <div class="option-content none-pointer" psId="`+e.PositionId+`">` + e.PositionName + `</div>
+                        <div class="option-content none-pointer" >` + e.PositionName + `</div>
                         </div>`
                         $(element).append(option);
+                        $(element).find(".option").last().data("positionInformation",e);
                     })
                 })
+                
             }
         })
 
@@ -193,20 +194,22 @@ class Employee extends BaseJs {
     loadEvent() {
         /* Common Events of related to employee  */
         /* Event for Button */
-        this.buttonObj.ldEvtRefreshButton(this);
-        this.buttonObj.ldEvtCloseButton();
-        this.buttonObj.ldEvtOpenButton();
-        this.buttonObj.ldEvtSaveButton(this);
-        this.buttonObj.ldEvtResizeButton();
-        this.buttonObj.ldEvtModifyEmployeeButton(this);
+        this.buttonClass.ldEvtRefreshButton(this);
+        this.buttonClass.ldEvtCloseButton();
+        this.buttonClass.ldEvtOpenButton();
+        this.buttonClass.ldEvtSaveButton(this);
+        this.buttonClass.ldEvtResizeButton();
+        this.buttonClass.ldEvtModifyEmployeeButton();
         // Events for checking valid input
         this.inputObj.ldEvtValidIptField(this);
         this.inputObj.ldEvtImgInput();
         /* Event for employee tab in homepage */
         this.initCombobox(); // init combobox
-        this.dropdownObj.lvEvtDropDownChoosing();
+        this.dropdownObj.lvEvtDropDownChoosing(this);
+        this.comboboxClass.initCustomizedSelect(this.inputClass)
     }
-    static renderDataEmployee(res,objScope) {
+    renderDataEmployee(res) {
+
         let thEmployeeTable = $('.employee-table thead th');
         let tbodyEmployeeTable = $('.employee-table tbody');
         let size = res.length;
@@ -224,9 +227,9 @@ class Employee extends BaseJs {
                     let value = obj[fieldName];
                     td = $(`<td fieldName="` + fieldName + `"></td>`);
                     if (fieldName == "DateOfBirth")
-                        value = objScope.formatDate(value);
+                        value = this.formatDate(value);
                     else if (fieldName == "Salary")
-                        value = objScope.formatMoney(value);
+                        value = this.formatMoney(value);
                     else if (fieldName == "WorkStatus") {
                         td = $(`<td fieldName="` + fieldName + `" value=` + value + `></td>`);
                         if (value != null) {
@@ -252,7 +255,7 @@ class Employee extends BaseJs {
             url: "http://cukcuk.manhnv.net/v1/Employees",
             method: "GET",
             success: (data) => {
-                Employee.renderDataEmployee(data,this);
+                this.renderDataEmployee(data,this);
             }
         })
     }

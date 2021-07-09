@@ -100,7 +100,7 @@ class Dropdown {
         }
         // Set event for options of customized select
         let options = document.querySelectorAll('.select-container .select-custom .option'); // options
-        $('.select-container .select-custom').on('mousedown', '.option', function (element) {
+        $('.select-container .select-custom').on('click', '.option', function (element) {
             let parentElement = $(this).parent().parent();
             // Turn the sibling options to default
             let optionSiblings = $(element.target).siblings();
@@ -179,12 +179,23 @@ class Dropdown {
     /**
      * 
      */
-    lvEvtDropDownChoosing(){
-        $('.content .select-custom.department').on('click','.option',()=>{
-            let dpId = $(this).attr('dpId');
-            let url = "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&pageNumber=1&employeeCode=NV&departmentId=" + dpId;
-            $('.employee-table tbody').empty();
-            
+    lvEvtDropDownChoosing(employee) {
+        $('.content .select-custom.department').add($('.content .select-custom.position')).on('click', '.option', (e) => {
+            setTimeout(function () {
+                let url = "";
+                $('.employee-table tbody').empty();
+                let departmentId = $('.content .select-custom.department .option.active-option').data("departmentInformation")
+                let positionId = $('.content .select-custom.position .option.active-option').data("positionInformation")
+                departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
+                positionId = positionId != undefined ? positionId.PositionId : ""
+                url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
+                $.ajax({
+                    url: url,
+                    method: "GET"
+                }).done((res) => {
+                    employee.renderDataEmployee(res.Data);
+                })
+            }, 100)
         })
     }
 }

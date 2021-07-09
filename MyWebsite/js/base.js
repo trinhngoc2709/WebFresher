@@ -7,6 +7,11 @@
         this.dropdownObj = new Dropdown();
         this.buttonObj = new Button();
         this.inputObj = new Input();
+        this.comboboxClass = new Combobox();
+        this.inputClass = new InputClass();
+        this.toggle = new Toggle();
+        this.popup = new Popup();
+        this.buttonClass = new ButtonClass(this.toggle,this.comboboxClass,this.inputClass,this.popup);
     }
     /***
      Created by tbNgoc at 30/06/2021
