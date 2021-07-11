@@ -23,6 +23,7 @@
     <link href="../static/css/common/padding.css" rel="stylesheet" />
     <link href="../static/css/common/border.css" rel="stylesheet" />
     <link href="../static/css/common/background.css" rel="stylesheet" />
+    <link href="../static/css/common/combobox.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -78,7 +79,7 @@
                     <div class="x-icon"></div><input class="icon-search input-search user-input" type="text"
                         placeholder="Tìm kiếm theo mã Mã, Tên hoặc Số điện thoại">
                 </div>
-                <div class="select-container filter-select">
+                <combobox class="select-container filter-select searching" id="cbx-dp-search">
                     <div class="x-icon combobox-icon"></div>
                     <input class="combobox user-input" type="text" />
                     <div class="select-custom department">
@@ -88,8 +89,8 @@
                         </div>
                     </div>
                     <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
-                </div>
-                <div class="select-container filter-select">
+                </combobox>
+                <combobox class="select-container filter-select searching" id="cbx-ps-search">
                     <div class="x-icon combobox-icon"></div>
                     <input class="combobox user-input" type="text" />
                     <div class="select-custom position">
@@ -99,7 +100,7 @@
                         </div>
                     </div>
                     <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
-                </div>
+                </combobox>
                 
             </div>
             <div class="filter-right">
@@ -186,8 +187,8 @@
                             <div class="name-information">
                                 Giới tính
                             </div>
-                            <div class="select-container ">
-                                <input fieldName="GenderName" class="combobox" type="text" readonly/>
+                            <combobox id="cbx-gender" class="select-container ">
+                                <input fieldName="GenderName" class="combobox" type="text"/>
                                 <div class="select-custom">
                                     <div class="option">
                                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
@@ -199,7 +200,7 @@
                                     </div>
                                 </div>
                                 <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
-                            </div>
+                            </combobox>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
@@ -251,23 +252,23 @@
                             <div class="name-information">
                                 Vị trí
                             </div>
-                            <div class="select-container">
+                            <combobox class="select-container" id="cbx-ps-form">
                                 <input class="combobox" type="text" readonly fieldName="PositionName"/>
                                 <div class="select-custom position">
                                 </div>
                                 <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
-                            </div>
+                            </combobox>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
                                 Phòng ban
                             </div>
-                            <div class="select-container ">
+                            <combobox class="select-container " id="cbx-dp-form">
                                 <input class="combobox " type="text" readonly fieldName="DepartmentName"/>
                                 <div class="select-custom department">
                                 </div>
                                 <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
-                            </div>
+                            </combobox>
                         </div>
                         <div class="input-information">
                             <div class="name-information">
@@ -303,7 +304,7 @@
                             </div>
                             <div class="select-container ">
                                 <input class="combobox" type="text" readonly fieldName="WorkStatus"/>
-                                <div class="select-custom dropup">
+                                <combobox class="select-custom dropup" id="cbx-work-stt">
                                     <div class="option">
                                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                                         <div class="option-content ">Đang làm việc</div>
@@ -312,7 +313,7 @@
                                         <img src="../static/icon/check.png" alt="">
                                         <div class="option-content">Đã nghỉ việc</div>
                                     </div>
-                                </div>
+                                </combobox>
                                 <div class="icon-container"><i class="fas fa-chevron-down icon-input"></i></div>
                             </div>
                         </div>
@@ -374,17 +375,19 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../js/plugin/plugin.js"></script>
     <script src="../../js/Base.js"></script>
     <script src="../../js/Employee.js"></script>
-    <script src="../../js/Dropdown.js"></script>
     <script src="../../js/Navbar.js"></script>
-    <script src="../../js/Button.js"></script>
     <script src="../../js/Input.js"></script>
     <script src="../js/elements/inputClass.js"></script>
     <script src="../js/elements/combobox.js"></script>
     <script src="../js/elements/toggle.js"></script>
     <script src="../js/elements/popup.js"></script>
     <script src="../js/elements/buttonClass.js"></script>
+    <script src="../js/elements/dropdownClass.js"></script>
+    <script src="../js/elements/iconClass.js"></script>
+    <script src="../js/common.js"></script>
 </body>
 
 </html>

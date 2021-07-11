@@ -35,13 +35,15 @@ class Employee extends BaseJs {
             method: "GET",
             success: function(data) {
                 $(".select-custom.department").each((index, element) => {
-                    data.forEach((e) => {
+                    $(element).find(".option").last().data("value",1);
+                    data.forEach((e,index) => {
                         let option = `<div class="option"">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                         <div class="option-content none-pointer">` + e.DepartmentName + `</div>
                         </div>`;
                         //console.log($(option).data("departmentInformation"))
                         $(element).append(option);
+                        $(element).find(".option").last().data("value",index+2);
                         $(element).find(".option").last().data("departmentInformation",e);
                     })
                 })
@@ -53,13 +55,15 @@ class Employee extends BaseJs {
             method: "GET",
             success: function(data) {
                 $(".select-custom.position").each((index, element) => {
-                    data.forEach((e) => {
+                    $(element).find(".option").last().data("value",1);
+                    data.forEach((e,index) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                         <div class="option-content none-pointer" >` + e.PositionName + `</div>
                         </div>`
                         $(element).append(option);
                         $(element).find(".option").last().data("positionInformation",e);
+                        $(element).find(".option").last().data("value",index+2);
                     })
                 })
                 
@@ -205,7 +209,10 @@ class Employee extends BaseJs {
         this.inputObj.ldEvtImgInput();
         /* Event for employee tab in homepage */
         this.initCombobox(); // init combobox
-        this.dropdownObj.lvEvtDropDownChoosing(this);
+        /* Event for dropdown */
+        this.comboboxClass.lvEvtDropDownChoosing(this);
+        this.comboboxClass.ldEvtCombobox(this);
+        
         this.comboboxClass.initCustomizedSelect(this.inputClass)
     }
     renderDataEmployee(res) {
@@ -242,9 +249,9 @@ class Employee extends BaseJs {
                 }
                 $(row).append(td);
             })
+            $(row).data("EmployeeId",obj.EmployeeId);
             tbodyEmployeeTable.append(row);
         })
-
     }
     /***
     Class Employee

@@ -4,14 +4,14 @@
      * **/
     constructor() {
         this.navBarObj = new NavBar();
-        this.dropdownObj = new Dropdown();
-        this.buttonObj = new Button();
         this.inputObj = new Input();
-        this.comboboxClass = new Combobox();
         this.inputClass = new InputClass();
+        this.dropdownObj = new DropdownClass();
         this.toggle = new Toggle();
         this.popup = new Popup();
-        this.buttonClass = new ButtonClass(this.toggle,this.comboboxClass,this.inputClass,this.popup);
+        this.icon = new Icon();
+        this.comboboxClass = new Combobox(this.inputClass,this.icon,this.dropdownObj);
+        this.buttonClass = new ButtonClass(this.toggle,this.comboboxClass,this.inputClass,this.popup);  
     }
     /***
      Created by tbNgoc at 30/06/2021
@@ -107,9 +107,6 @@
     loadEvent() {
         /* Event for Navbar */
         this.navBarObj.ldEvtHomepage();
-        /* Event for dropdown */
-        this.dropdownObj.ldEvtDropdown();
-
         
     }
 }

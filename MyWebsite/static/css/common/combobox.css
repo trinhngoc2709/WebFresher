@@ -1,0 +1,11 @@
+combobox{
+    display: inline-block;
+    position: absolute;
+}
+
+.content combobox:last-of-type{
+    margin-left: 264px;
+}
+.content combobox .wrong-input{
+    left: 25px;
+}

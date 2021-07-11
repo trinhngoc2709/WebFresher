@@ -2,7 +2,9 @@ class Dropdown {
     constructor() {
 
     }
-    ldEvtDropdown() {
+    
+    ldEvtDropdown(employee) {
+        var self = this;
         let check = true;
         /* Event for Customize Select */
         // Event for input field and icon
@@ -75,21 +77,49 @@ class Dropdown {
                     check = true;
                     //setTimeout(check = true,500);
                 },
-                // Key up events Enter: confirm, Arrow Up, ArrowDown: change the option
-                keyup: (e) => {
+                'input change': (e) => {
+                    setTimeout(() => {
+                        let filterText = $(e.target).val();
+                        let options = $(e.target).parent().find('.option');
+                        $(options).each(function () {
+                            $(this).removeClass('active-option')
+                            $(this).parent().find('img').addClass('invisible')
+                            let optionContent = $(this).find('.option-content').text()
+                            if (optionContent.search(filterText) != -1)
+                                $(this).show();
+                            else
+                                $(this).hide();
+                        })
+                        if (customSelect.css("display") == "none") {
+                            displayCustomizedSelect(customSelect);
+                            rotateIconInput(iconInput);
+                            $(element).parent().find('.icon-container').toggleClass("background-bbb");
+                        }
+                    }, 200)
+                }, // Key up events Enter: confirm, Arrow Up, ArrowDown: change the option
+                keydown: (e) => {
                     //let customizedSelect = $(e.target).parent().find('.select-custom');
-                    let options = $(e.target).parent().find('.option');
+                    let options = $(e.target).parent().find('.option').filter(function () {
+                        return $(this).css('display') != "none";
+                    });
                     if (e.code === "Enter") { // Enter event : display customized select, rotate the input
-                        rotateIconInput(iconInput);
-                        $(element).parent().find('input').toggleClass("border-green");
-                        $(element).parent().find('.icon-container').toggleClass("background-bbb");
-                        displayCustomizedSelect(customSelect);
+                        setTimeout(() => {
+                            rotateIconInput(iconInput);
+                            $(element).parent().find('input').toggleClass("border-green");
+                            $(element).parent().find('.icon-container').toggleClass("background-bbb");
+                            displayCustomizedSelect(customSelect);
+                        }, 100)
+                        if (customSelect.parent().find('.select-custom').css('display') != 'none' && customSelect.parent().hasClass('searching'))
+                            self.filterData(employee);
                     } else if (e.code == "ArrowUp" || e.code == "ArrowDown") // ArrowUp ArrowDown event : change the option
                     {
                         if (customSelect.css("display") == "none") {
                             displayCustomizedSelect(customSelect);
+                            rotateIconInput(iconInput);
+                            $(element).parent().find('.icon-container').toggleClass("background-bbb");
                         }
                         displayOption(options, e.code, e.target);
+                        //$(e.target).trigger("input")
                     }
                 }
             })
@@ -99,32 +129,34 @@ class Dropdown {
             $(iconInput).toggleClass("rotate-X");
         }
         // Set event for options of customized select
-        let options = document.querySelectorAll('.select-container .select-custom .option'); // options
+        //let options = document.querySelectorAll('.select-container .select-custom .option'); // options
         $('.select-container .select-custom').on('click', '.option', function (element) {
-            let parentElement = $(this).parent().parent();
-            // Turn the sibling options to default
-            let optionSiblings = $(element.target).siblings();
+            if (element.keyCode == undefined || element.keyCode == 13) {
+                let parentElement = $(this).parent().parent();
+                // Turn the sibling options to default
+                let optionSiblings = $(element.target).siblings();
 
-            //console.log(optionSiblings)
-            $(optionSiblings).find('img').hide();
-            $(optionSiblings).removeClass('active-option');
-            $(optionSiblings).removeClass("padding-left-0");
-            $(optionSiblings).addClass("padding-left-40");
+                //console.log(optionSiblings)
+                $(optionSiblings).find('img').hide();
+                $(optionSiblings).removeClass('active-option');
+                $(optionSiblings).removeClass("padding-left-0");
+                $(optionSiblings).addClass("padding-left-40");
 
-            // Active the chosen option
-            $(this).addClass('active-option');
-            $(this).parent().parent().find('input').val($(this).text());
-            $(this).find('img').show();
-            $(this).addClass("padding-left-0");
-            $(this).removeClass("padding-left-40");
-            $(this).parent().parent().find('input').val($(this).find('.option-content').text());
+                // Active the chosen option
+                $(this).addClass('active-option');
+                $(this).parent().parent().find('input').val($(this).text());
+                $(this).find('img').show();
+                $(this).addClass("padding-left-0");
+                $(this).removeClass("padding-left-40");
+                $(this).parent().parent().find('input').val($(this).find('.option-content').text());
 
-            // Toggle Select Custom, Icon Container
-            displayCustomizedSelect($(this).parent())
-            $(parentElement).find("input").toggleClass("border-green")
-            $(parentElement).find(".icon-container").toggleClass("background-bbb")
-            $(parentElement).find('.x-icon').show();
-            rotateIconInput(parentElement.find('.icon-input'));
+                // Toggle Select Custom, Icon Container
+                displayCustomizedSelect($(this).parent())
+                $(parentElement).find("input").toggleClass("border-green")
+                $(parentElement).find(".icon-container").toggleClass("background-bbb")
+                $(parentElement).find('.x-icon').show();
+                rotateIconInput(parentElement.find('.icon-input'));
+            }
         })
         // Function display/hide customized select
         function displayCustomizedSelect(customizedSelect) {
@@ -180,22 +212,25 @@ class Dropdown {
      * 
      */
     lvEvtDropDownChoosing(employee) {
-        $('.content .select-custom.department').add($('.content .select-custom.position')).on('click', '.option', (e) => {
-            setTimeout(function () {
-                let url = "";
-                $('.employee-table tbody').empty();
-                let departmentId = $('.content .select-custom.department .option.active-option').data("departmentInformation")
-                let positionId = $('.content .select-custom.position .option.active-option').data("positionInformation")
-                departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
-                positionId = positionId != undefined ? positionId.PositionId : ""
-                url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
-                $.ajax({
-                    url: url,
-                    method: "GET"
-                }).done((res) => {
-                    employee.renderDataEmployee(res.Data);
-                })
-            }, 100)
+        $('.content .select-custom.department').add($('.content .select-custom.position')).on('click keydown', '.option', (e) => {
+            this.filterData(employee);
         })
+    }
+    filterData(employee) {
+        setTimeout(function () {
+            let url = "";
+            $('.employee-table tbody').empty();
+            let departmentId = $('.content .select-custom.department .option.active-option').data("departmentInformation")
+            let positionId = $('.content .select-custom.position .option.active-option').data("positionInformation")
+            departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
+            positionId = positionId != undefined ? positionId.PositionId : ""
+            url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
+            $.ajax({
+                url: url,
+                method: "GET"
+            }).done((res) => {
+                employee.renderDataEmployee(res.Data);
+            })
+        }, 100)
     }
 }

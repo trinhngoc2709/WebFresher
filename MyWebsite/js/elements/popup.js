@@ -7,6 +7,6 @@ class Popup{
     layoutBlue = $('.layout-blur')
     
     constructor() {
-
+        
     }
 }

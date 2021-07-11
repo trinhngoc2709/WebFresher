@@ -1,7 +1,4 @@
-$(document).ready(function (){
-    new ButtonClass()
-})
-class ButtonClass{
+class ButtonClass {
 
     // Common Buttons
     refreshButton = $('.m-button-refresh.employee')
@@ -18,8 +15,8 @@ class ButtonClass{
     closeWarningPopupButton = $('.popup-warning img.close-button,.popup-warning .popup-footer button:first-of-type')
     // Error Popup Buttons
     closeErrorPopupButton = $('.popup-list .popup-footer button,.popup-list img.close-button')
-    
-    constructor(toggle,combobox,input,popup) {
+
+    constructor(toggle, combobox, input, popup) {
         this.popup = popup
         this.toggle = toggle;
         this.combobox = combobox;
@@ -29,69 +26,81 @@ class ButtonClass{
 
     ldEvtModifyEmployeeButton() {
         // Event for edit and delete employee
-        let employeeTable = $('.employee-table tbody');
+        let employeeTable = $('.employee-table tbody'); // Employee table
+        // Edit event
         $(employeeTable).on('click', '.edit-icon', (e) => {
-            this.toggle.toggleEmployeeForm(this.combobox,this.input);
+            let employeeId = $(e.target).parent().parent().data("EmployeeId")
+            this.toggle.toggleEmployeeForm(this.combobox, this.input); // Display Employee Form
             setTimeout(() => {
-                $('.employee-detail .title').text("SỬA THÔNG TIN NHÂN VIÊN");
-                $('.employee-detail').attr("type", "Edit")
-                let objEmployee = {};
-                $(e.target).parent().siblings().each((index, element) => {
-                    if ($(element).attr('fieldName') == "DateOfBirth")
-                        objEmployee[$(element).attr('fieldName')] = $(element).text().split("/").reverse().join("-");
-                    else if ($(element).attr('fieldName') == "WorkStatus") {
-                        objEmployee[$(element).attr('fieldName')] = (($(element).attr('value') != "null") ? "Đang làm việc" : "Đã nghỉ việc");
-                    } else if ($(element).attr('fieldName') == "GenderName") {
-                        let genderName = $(element).text();
-                        objEmployee[$(element).attr('fieldName')] = genderName;
-                        if (genderName == "Nam")
-                            objEmployee.gender = 1;
-                        else if (genderName == "Nữ")
-                            objEmployee.gender = 2;
-                        else
-                            objEmployee.gender = 3;
-                    } else
-                        objEmployee[$(element).attr('fieldName')] = $(element).text();
-                })
-                $(this.input.employeeDetailInputs).each((index, element) => {
-                    if (objEmployee[$(element).attr('fieldName')]) {
-                        $(element).val(objEmployee[$(element).attr('fieldName')])
-                    }
+                $.ajax({
+                    method: 'GET',
+                    url: "http://cukcuk.manhnv.net/v1/Employees/" + employeeId
+                }).done((data) => {
+                    console.log(data)
+                    $('.employee-detail .title').text("SỬA THÔNG TIN NHÂN VIÊN");
+                    $('.employee-detail').attr("type", "Edit") // Change type action: Must change to method type variable
+                    let objEmployee = {};
+                    // Get the data from table
+                    $(e.target).parent().siblings().each((index, element) => {
+                        if ($(element).attr('fieldName') == "DateOfBirth")
+                            objEmployee[$(element).attr('fieldName')] = $(element).text().split("/").reverse().join("-");
+                        else if ($(element).attr('fieldName') == "WorkStatus") {
+                            objEmployee[$(element).attr('fieldName')] = (($(element).attr('value') != "null") ? "Đang làm việc" : "Đã nghỉ việc");
+                        } else if ($(element).attr('fieldName') == "GenderName") {
+                            let genderName = $(element).text();
+                            objEmployee[$(element).attr('fieldName')] = genderName;
+                            if (genderName == "Nam")
+                                objEmployee.gender = 1;
+                            else if (genderName == "Nữ")
+                                objEmployee.gender = 2;
+                            else
+                                objEmployee.gender = 3;
+                        } else
+                            objEmployee[$(element).attr('fieldName')] = $(element).text();
+                    })
+                    // Binding value to employee form
+                    $(this.input.employeeDetailInputs).each((index, element) => {
+                        if (objEmployee[$(element).attr('fieldName')]) {
+                            $(element).val(objEmployee[$(element).attr('fieldName')])
+                        }
+                    })
                 })
             }, 100)
         })
-        let employeeCode = "";
+        let employeeId = "";
+        // Delete event
         $(employeeTable).on('click', '.delete-icon', (e) => {
-            this.toggle.toggleConfirmationPopup(this.popup);
-            employeeCode = $(e.target).parent().siblings().first().text();
+            this.toggle.toggleConfirmationPopup(this.popup); // Display confirmation popup
+            employeeId = $(e.target).parent().parent().data("EmployeeId");
         })
-        $(this.confirmConfirmationPopupButton).click(() => {
+        // Event for confirm button
+        $(this.confirmConfirmationPopupButton).click((e) => {
             this.toggle.toggleConfirmationPopup(this.popup)
             $.ajax({
-                url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1&employeeCode=" + employeeCode,
-                method: "GET",
+                url: "http://cukcuk.manhnv.net/v1/Employees/" + employeeId,
+                method: "DELETE",
                 success: (data) => {
-                    let employeeId = data.Data[0].EmployeeId
-                    $.ajax({
-                        url: "http://cukcuk.manhnv.net/v1/Employees/" + employeeId,
-                        method: "DELETE",
-                        success: (data) => {
-                            this.refreshButton.trigger('click');
-                            // Check Status Please complete
-                        }
-                    })
+                    if (data) {
+                        // Update employee table
+                        this.refreshButton.trigger('click');
+                        // Check Status Please complete toast message
+                    }
 
                 }
             })
         })
     }
-
+    /**
+     * Event for save/edit information of new employee
+     * @param {Employee} employee 
+     */
     ldEvtSaveButton(employee) {
         // Event for save information of new employee
         $(this.employeeSaveButton).click(() => {
             if (employee.checkValidInputs(employee) || true) {
                 let objEmployee = {}
                 let inputUpload = $('.employee-detail input').filter((index, element) => $(element).attr("fieldname") != undefined)
+                // Saving the data of new employee
                 $(inputUpload).each((index, element) => {
                     if ($(element).attr("fieldname") == "WorkStatus")
                         objEmployee[$(element).attr('fieldName')] = $(element).val() == "Đang làm việc" ? 1 : 0
@@ -108,6 +117,7 @@ class ButtonClass{
                     } else
                         objEmployee[$(element).attr('fieldName')] = $(element).val().replaceAll('.', '');
                 })
+                //objEmployee["DepartmentCode"] = 
                 // Get Department Code 
                 setTimeout(() => {
                     $.ajax({
@@ -197,7 +207,7 @@ class ButtonClass{
     ldEvtOpenButton() {
         // Show the employee detail event
         $(this.openEmployeeFormButton).click(() => {
-            this.toggle.toggleEmployeeForm(this.combobox,this.input);
+            this.toggle.toggleEmployeeForm(this.combobox, this.input);
         })
 
     }
@@ -224,7 +234,7 @@ class ButtonClass{
         // Close employee detail form
         $(this.confirmWarningPopupButton).click(() => {
             this.toggle.toggleWarningPopup(this.popup);
-            this.toggle.toggleEmployeeForm(this.combobox,this.input);
+            this.toggle.toggleEmployeeForm(this.combobox, this.input);
         })
         $(this.closeWarningPopupButton).click(() => {
             this.toggle.toggleWarningPopup(this.popup);

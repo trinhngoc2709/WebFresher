@@ -17,7 +17,6 @@
     .select-custom .option{
         background-color: #ffffff;
         z-index: 2;
-        padding-left: 40px;
         padding-right: 16px;
         display: flex;
         align-items: center;
@@ -32,7 +31,7 @@
             width: 20px;
             height: 20px;
             margin: 0px 10px;
-            display: none;
+            visibility: hidden;
         }
         .select-custom .option:hover {
             background-color: #E9EBEE;

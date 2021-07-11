@@ -93,6 +93,12 @@ button{
 .none-pointer{
     pointer-events: none;
 }
+.border-red{
+    border: 1px solid #FF4747 !important;
+}
+.visible{
+    visibility: visible !important;
+}
 @font-face {
     font-family: 'GoogleSans-Bold';
     src: url('../../font/GoogleSans-Bold.otf') format('opentype');
