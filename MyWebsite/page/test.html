@@ -1,12 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    toast-message {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        right: 10px;
+        top: 30px;
+        height: auto;
+        width: 300px;
+    }
+
+    toast-message .toast {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+        height: 48px;
+        width: 300px;
+        box-sizing: border-box;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    toast-message .toast .toast-left-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    toast-message .toast .toast-img {
+        height: 24px;
+        width: 24px;
+        background-repeat: no-repeat;
+        background-size: 16px;
+        background-position: center 4px;
+        margin-left: 10px;
+        border-radius: 50% 50%;
+    }
+
+    toast-message .toast.error .toast-img {
+        background-image: url("../static/icon/error-toast.png");
+        background-color: #eb5757;
+    }
+
+    toast-message .toast.warning .toast-img {
+        background-image: url("../static/icon/exclamation.png");
+        background-color: #f1c04e;
+    }
+
+    toast-message .toast.success .toast-img {
+        background-image: url("../static/icon/tick.png");
+        background-color: #01b075;
+    }
+
+    toast-message .toast.information .toast-img {
+        background-image: url("../static/icon/information.png");
+        background-color: #4388d9;
+    }
+
+    toast-message .toast .toast-icon {
+        height: 24px;
+        width: 24px;
+        background-repeat: no-repeat;
+        background-position: center 4px;
+        background-size: 16px;
+        margin-right: 14px;
+    }
+
+    toast-message .toast.error .toast-icon {
+        background-image: url("../static/icon/error-close.png")
+    }
+
+    toast-message .toast.warning .toast-icon {
+        background-image: url("../static/icon/warning-close.png")
+    }
+
+    toast-message .toast.success .toast-icon {
+        background-image: url("../static/icon/success-close.png")
+    }
+
+    toast-message .toast.information .toast-icon {
+        background-image: url("../static/icon/information-close.png")
+    }
+
+    toast-message .toast .toast-content {
+        margin-left: 14px;
+    }
+</style>
+
 <body>
-    <script src="../js/elements/button.js"></script>
+    <button type="button">Click</button>
+    <toast-message>
+    </toast-message>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script>
+        $('button').click(() => {
+            let content = "Hellllooooo";
+            let type = "error"
+            let index = Common.randomText(5) + $('toast-message').find('.toast').length;
+            let toast = `<div class="toast ${type}" index="${index}" style="display:none">
+            <div class="toast-left-content">
+                <div class="toast-img"></div>
+                <div class="toast-content">${content}</div>
+            </div>
+            <div class="toast-right-content">
+                <div class="toast-icon"></div>
+            </div>
+            </div>`
+            $(toast).attr('index',index);
+            $('toast-message').append(toast)
+            $(".toast[index="+index+"]").show("slide", { direction: "right" }, 1000)
+            $(".toast[index="+index+"]")
+            setTimeout(() => {
+                $(".toast[index="+index+"]").hide("slide",{ direction: "right" }, 1000)
+            },3000)
+            setTimeout(() => {
+                $(".toast[index="+index+"]").remove();
+                $(".ui-effects-placeholder").remove();
+            },4000)
+        })
+    </script>
 </body>
+
 </html>

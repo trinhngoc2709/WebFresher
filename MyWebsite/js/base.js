@@ -10,8 +10,10 @@
         this.toggle = new Toggle();
         this.popup = new Popup();
         this.icon = new Icon();
-        this.comboboxClass = new Combobox(this.inputClass,this.icon,this.dropdownObj);
-        this.buttonClass = new ButtonClass(this.toggle,this.comboboxClass,this.inputClass,this.popup);  
+        this.toast = new ToastMessage();
+        this.comboboxClass = new Combobox(this.inputClass,this.icon,this.dropdownObj,this.toast);
+        this.buttonClass = new ButtonClass(this.toggle,this.comboboxClass,this.inputClass,this.popup,this.toast);  
+        this.pagingBar = new PagingBar();
     }
     /***
      Created by tbNgoc at 30/06/2021

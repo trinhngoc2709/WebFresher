@@ -13,10 +13,10 @@ class Employee extends BaseJs {
     constructor() {
         super();
         this.urlApis = {
-            getEmployees    : "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
-            getMaxIdEmployee    : "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
-            getDepartment   : "http://cukcuk.manhnv.net/api/Department",
-            getPosition     : "http://cukcuk.manhnv.net/v1/Positions"
+            getEmployees: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+            getMaxIdEmployee: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+            getDepartment: "http://cukcuk.manhnv.net/api/Department",
+            getPosition: "http://cukcuk.manhnv.net/v1/Positions"
         }
         this.loadData();
         this.loadEvent();
@@ -33,18 +33,18 @@ class Employee extends BaseJs {
         $.ajax({
             url: this.urlApis.getDepartment,
             method: "GET",
-            success: function(data) {
+            success: function (data) {
                 $(".select-custom.department").each((index, element) => {
-                    $(element).find(".option").last().data("value",1);
-                    data.forEach((e,index) => {
+                    $(element).find(".option").last().data("value", 1);
+                    data.forEach((e, index) => {
                         let option = `<div class="option"">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                         <div class="option-content none-pointer">` + e.DepartmentName + `</div>
                         </div>`;
                         //console.log($(option).data("departmentInformation"))
                         $(element).append(option);
-                        $(element).find(".option").last().data("value",index+2);
-                        $(element).find(".option").last().data("departmentInformation",e);
+                        $(element).find(".option").last().data("value", index + 2);
+                        $(element).find(".option").last().data("departmentInformation", e);
                     })
                 })
             }
@@ -53,20 +53,20 @@ class Employee extends BaseJs {
         $.ajax({
             url: this.urlApis.getPosition,
             method: "GET",
-            success: function(data) {
+            success: function (data) {
                 $(".select-custom.position").each((index, element) => {
-                    $(element).find(".option").last().data("value",1);
-                    data.forEach((e,index) => {
+                    $(element).find(".option").last().data("value", 1);
+                    data.forEach((e, index) => {
                         let option = `<div class="option">
                         <div class="option-icon"><img src="../static/icon/check.png" alt=""></div>
                         <div class="option-content none-pointer" >` + e.PositionName + `</div>
                         </div>`
                         $(element).append(option);
-                        $(element).find(".option").last().data("positionInformation",e);
-                        $(element).find(".option").last().data("value",index+2);
+                        $(element).find(".option").last().data("positionInformation", e);
+                        $(element).find(".option").last().data("value", index + 2);
                     })
                 })
-                
+
             }
         })
 
@@ -200,10 +200,10 @@ class Employee extends BaseJs {
         /* Event for Button */
         this.buttonClass.ldEvtRefreshButton(this);
         this.buttonClass.ldEvtCloseButton();
-        this.buttonClass.ldEvtOpenButton();
+        this.buttonClass.ldEvtOpenButton(this.inputClass, this.toast);
         this.buttonClass.ldEvtSaveButton(this);
         this.buttonClass.ldEvtResizeButton();
-        this.buttonClass.ldEvtModifyEmployeeButton();
+        this.buttonClass.ldEvtModifyEmployeeButton(this.toast);
         // Events for checking valid input
         this.inputObj.ldEvtValidIptField(this);
         this.inputObj.ldEvtImgInput();
@@ -212,16 +212,18 @@ class Employee extends BaseJs {
         /* Event for dropdown */
         this.comboboxClass.lvEvtDropDownChoosing(this);
         this.comboboxClass.ldEvtCombobox(this);
-        
         this.comboboxClass.initCustomizedSelect(this.inputClass)
-    }
-    renderDataEmployee(res) {
 
+        this.pagingBar.ldEventPaging(this);
+    }
+    renderDataEmployee(res, count) {
+        $('.employee-table tbody').empty();
         let thEmployeeTable = $('.employee-table thead th');
         let tbodyEmployeeTable = $('.employee-table tbody');
         let size = res.length;
         // Display to Paging Bar
-        $('.paging-bar .display-employee').text("Hiển thị 1-12/" + size + " nhân viên");
+        if(!$('.paging-bar .display-employee').text())
+            $('.paging-bar .display-employee').text("Hiển thị 1-14/" + count + " nhân viên");
         // Render Data Employee
         $.each(res, (index, obj) => {
             let row = $(`<tr></tr>`);
@@ -249,7 +251,7 @@ class Employee extends BaseJs {
                 }
                 $(row).append(td);
             })
-            $(row).data("EmployeeId",obj.EmployeeId);
+            $(row).data("EmployeeId", obj.EmployeeId);
             tbodyEmployeeTable.append(row);
         })
     }
@@ -259,10 +261,11 @@ class Employee extends BaseJs {
     ***/
     loadData() {
         $.ajax({
-            url: "http://cukcuk.manhnv.net/v1/Employees",
+            url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=1&employeeCode=NV&departmentId=&positionId=",
             method: "GET",
             success: (data) => {
-                this.renderDataEmployee(data,this);
+                this.renderDataEmployee(data.Data, data.TotalRecord);
+                ToastMessage.createToastMessage("Lấy dữ liệu thành công", "success")
             }
         })
     }

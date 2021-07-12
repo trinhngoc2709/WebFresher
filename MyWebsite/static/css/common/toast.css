@@ -1,0 +1,88 @@
+toast-message {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 10px;
+    top: 30px;
+    height: auto;
+    width: 300px;
+}
+
+toast-message .toast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    height: 48px;
+    width: 300px;
+    box-sizing: border-box;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+toast-message .toast .toast-left-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+toast-message .toast .toast-img {
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: center 4px;
+    margin-left: 10px;
+    border-radius: 50% 50%;
+}
+
+toast-message .toast.error .toast-img {
+    background-image: url("../../icon/error-toast.png");
+    background-color: #eb5757;
+}
+
+toast-message .toast.warning .toast-img {
+    background-image: url("../..//icon/exclamation.png");
+    background-color: #f1c04e;
+}
+
+toast-message .toast.success .toast-img {
+    background-image: url("../..//icon/tick.png");
+    background-color: #01b075;
+}
+
+toast-message .toast.information .toast-img {
+    background-image: url("../..//icon/information.png");
+    background-color: #4388d9;
+}
+
+toast-message .toast .toast-icon {
+    height: 24px;
+    width: 24px;
+    background-repeat: no-repeat;
+    background-position: center 4px;
+    background-size: 16px;
+    margin-right: 14px;
+}
+
+toast-message .toast.error .toast-icon {
+    background-image: url("../..//icon/error-close.png")
+}
+
+toast-message .toast.warning .toast-icon {
+    background-image: url("../..//icon/warning-close.png")
+}
+
+toast-message .toast.success .toast-icon {
+    background-image: url("../..//icon/success-close.png")
+}
+
+toast-message .toast.information .toast-icon {
+    background-image: url("../..//icon/information-close.png")
+}
+
+toast-message .toast .toast-content {
+    margin-left: 14px;
+}

@@ -24,6 +24,7 @@
     <link href="../static/css/common/border.css" rel="stylesheet" />
     <link href="../static/css/common/background.css" rel="stylesheet" />
     <link href="../static/css/common/combobox.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../static/css/common/toast.css" />
 </head>
 
 <body>
@@ -132,16 +133,16 @@
         <div class="paging-bar">
             <div class="display-employee"></div>
             <div class="paging">
-                <img src="../static/icon/btn-firstpage.svg" alt="">
-                <img src="../static/icon/btn-prev-page.svg" alt="">
-                <div class="paging-number">1</div>
+                <img id="first-button" src="../static/icon/btn-firstpage.svg" alt="">
+                <img id="prev-button" src="../static/icon/btn-prev-page.svg" alt="">
+                <div class="paging-number left-most active-option">1</div>
                 <div class="paging-number">2</div>
                 <div class="paging-number">3</div>
-                <div class="paging-number">4</div>
-                <img src="../static/icon/btn-next-page.svg" alt="">
-                <img src="../static/icon/btn-lastpage.svg" alt="">
+                <div class="paging-number right-most">4</div>
+                <img id="next-button" src="../static/icon/btn-next-page.svg" alt="">
+                <img id="last-button" src="../static/icon/btn-lastpage.svg" alt="">
             </div>
-            <div class="max-employee">12 nhân viên/trang</div>
+            <div class="max-employee">14 nhân viên/trang</div>
         </div>
 
     </div>
@@ -373,6 +374,7 @@
             </div>
         </div>
     </div>
+    <toast-message></toast-message>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
     <script src="../js/plugin/plugin.js"></script>
@@ -387,6 +389,8 @@
     <script src="../js/elements/buttonClass.js"></script>
     <script src="../js/elements/dropdownClass.js"></script>
     <script src="../js/elements/iconClass.js"></script>
+    <script src="../js/elements/toastMessage.js"></script>
+    <script src="../js/elements/paggingBar.js"></script>
     <script src="../js/common.js"></script>
 </body>
 

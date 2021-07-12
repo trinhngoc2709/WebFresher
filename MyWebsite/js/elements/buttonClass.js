@@ -10,21 +10,23 @@ class ButtonClass {
     // Confirmation Popup Buttons
     confirmConfirmationPopupButton = $('.popup-confirmation button:first-of-type')
     cancelConfirmationPopupButton = $('.popup-confirmation button:last-of-type')
+    closeConfirmationPopupButton = $('.popup-confirmation .close-button')
     // Warning Popup Buttons
     confirmWarningPopupButton = $('.popup-warning .popup-footer button:last-of-type');
     closeWarningPopupButton = $('.popup-warning img.close-button,.popup-warning .popup-footer button:first-of-type')
     // Error Popup Buttons
     closeErrorPopupButton = $('.popup-list .popup-footer button,.popup-list img.close-button')
 
-    constructor(toggle, combobox, input, popup) {
+    constructor(toggle, combobox, input, popup,toast) {
         this.popup = popup
         this.toggle = toggle;
         this.combobox = combobox;
         this.input = input;
+        this.toast = toast;
     }
 
 
-    ldEvtModifyEmployeeButton() {
+    ldEvtModifyEmployeeButton(toast) {
         // Event for edit and delete employee
         let employeeTable = $('.employee-table tbody'); // Employee table
         // Edit event
@@ -73,6 +75,9 @@ class ButtonClass {
             this.toggle.toggleConfirmationPopup(this.popup); // Display confirmation popup
             employeeId = $(e.target).parent().parent().data("EmployeeId");
         })
+        $(this.cancelConfirmationPopupButton).add($(this.closeConfirmationPopupButton)).click(() => {
+            this.toggle.toggleConfirmationPopup(this.popup)
+        });
         // Event for confirm button
         $(this.confirmConfirmationPopupButton).click((e) => {
             this.toggle.toggleConfirmationPopup(this.popup)
@@ -84,6 +89,9 @@ class ButtonClass {
                         // Update employee table
                         this.refreshButton.trigger('click');
                         // Check Status Please complete toast message
+                        if (data) {
+                            ToastMessage.createToastMessage("Xóa thành công", "success")
+                        }
                     }
 
                 }
@@ -105,18 +113,21 @@ class ButtonClass {
                     if ($(element).attr("fieldname") == "WorkStatus")
                         objEmployee[$(element).attr('fieldName')] = $(element).val() == "Đang làm việc" ? 1 : 0
                     else if ($(element).attr("fieldname") == "GenderName") {
-                        let genderName = $(element).text();
+                        let genderName = $(element).val();
                         objEmployee[$(element).attr('fieldName')] = genderName;
                         if (genderName == "Nam")
                             objEmployee.gender = 1;
                         else if (genderName == "Nữ")
-                            objEmployee.gender = 2;
+                            objEmployee.gender = 0;
                         else
                             objEmployee.gender = 3;
+                        console.log(genderName);
+                        console.log(objEmployee.gender);
                         //objEmployee[$(element).attr('fieldName')] = $(element).val();
                     } else
                         objEmployee[$(element).attr('fieldName')] = $(element).val().replaceAll('.', '');
                 })
+                console.log(objEmployee)
                 //objEmployee["DepartmentCode"] = 
                 // Get Department Code 
                 setTimeout(() => {
@@ -159,16 +170,14 @@ class ButtonClass {
                             dataType: 'json'
                         }).done((res) => {
                             if (res)
-                                console.log("Thêm thành công ")
+                               ToastMessage.createToastMessage("Thêm nhân viên thành công","success")
                             else
-                                console.log("Thêm thất bại")
+                               ToastMessage.createToastMessage("Thêm nhân viên thất bại","error")
                         })
                     }, 300)
                 } else {
-
                     setTimeout(() => {
                         $.ajax({
-
                             url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1&employeeCode=" + objEmployee.EmployeeCode,
                             method: "GET",
                             success: (data) => {
@@ -181,11 +190,10 @@ class ButtonClass {
                                     dataType: 'json'
                                 }).done((res) => {
                                     if (res)
-                                        console.log("Sửa thành công ")
+                                        ToastMessage.createToastMessage("Sửa nhân viên thành công","success")
                                     else
-                                        console.log("Sửa thất bại")
+                                        ToastMessage.createToastMessage("Sửa nhân viên thất bại","error")
                                 })
-
                             }
                         })
                     }, 300)
@@ -200,14 +208,44 @@ class ButtonClass {
     ldEvtRefreshButton(employee) {
         // Event for refresh
         $(this.refreshButton).click(() => {
+            let url = "";
             $('.employee-table tbody').empty();
-            employee.loadData();
+            let departmentId = $('.content .select-custom.department .option.active-option').data("departmentInformation")
+            let positionId = $('.content .select-custom.position .option.active-option').data("positionInformation")
+            departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
+            positionId = positionId != undefined ? positionId.PositionId : ""
+            url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=1&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
+            $.ajax({
+                url: url,
+                method: "GET"
+            }).done((res) => {
+                $('paging-bar').data("maxPage",res.TotalPage)
+                employee.renderDataEmployee(res.Data,res.TotalRecord);
+                ToastMessage.createToastMessage("Cập nhật dữ liệu thành công","success");
+            }).fail((err) => {  
+                ToastMessage.createToastMessage("Cập nhật dữ liệu thất bại","error");
+            })
         })
     }
-    ldEvtOpenButton() {
+    ldEvtOpenButton(input,toast) {
         // Show the employee detail event
         $(this.openEmployeeFormButton).click(() => {
             this.toggle.toggleEmployeeForm(this.combobox, this.input);
+            // Get new employee code
+            setTimeout(() => {
+                $.ajax({
+                    url: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
+                    method: "GET",
+                    success: (data) => {
+                        $(this.input.employeeCodeInputEmployeeDetail).val(data)
+                        ToastMessage.createToastMessage("Lấy mã nhân viên mới thành công", "success")
+                    },
+                    error: () => {
+                        console.log("Lỗi")
+                        ToastMessage.createToastMessage("Lấy mã nhân viên mới thất bại", "error")
+                    }
+                })
+            }, 0)
         })
 
     }
@@ -220,16 +258,6 @@ class ButtonClass {
         $(this.closeEmployeeFormButton).click(() => {
             this.toggle.toggleWarningPopup(this.popup);
         });
-
-        // Event for close popup
-        //let closeButton = $('.popup-warning .popup-footer button:last-of-type');
-        //let closeButtonError = $('.popup-list .popup-footer button');
-        //let closeButtonError1 = $('.popup-list img.close-button');
-        //let closeButtonWarning = $('.popup-warning img.close-button');
-        //let continueInputButton = $('.popup-warning .popup-footer button:first-of-type');
-        //let closeButtonConfirmation = $('.popup-confirmation img.close-button');
-
-        //let cancelButtonConfirmation = $('.popup-confirmation button:last-of-type');
 
         // Close employee detail form
         $(this.confirmWarningPopupButton).click(() => {

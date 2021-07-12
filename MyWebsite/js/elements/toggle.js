@@ -22,7 +22,6 @@ class Toggle {
     }
     // Function for toggleConfirmationPopup
     toggleConfirmationPopup(popup) {
-        console.log(popup)
         popup.dialog.slideToggle(300, "linear")
         popup.popupConfirmation.slideToggle(300, "swing")
         popup.popupLayout.slideToggle(300, "swing")

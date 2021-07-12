@@ -5,10 +5,11 @@ class Combobox {
      * @param {Icon} iconObj 
      * @param {Dropdown} dropdownObj 
      */
-    constructor(inputObj, iconObj, dropdownObj) {
+    constructor(inputObj, iconObj, dropdownObj,toast) {
         this.inputObj = inputObj
         this.iconObj = iconObj
         this.dropdownObj = dropdownObj
+        this.toast = toast;
     }
     /**
      * Initialize value for combobox
@@ -31,19 +32,7 @@ class Combobox {
         datePickerField.each((index, element) => {
             $(element).val("")
         })
-        // Get new employee code
-        setTimeout(() => {
-            $.ajax({
-                url: "http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode",
-                method: "GET",
-                success: function (data) {
-                    $(input.employeeCodeInputEmployeeDetail).val(data)
-                },
-                error: function (data) {
-                    console.log("Lỗi")
-                }
-            })
-        }, 0)
+        
     }
 
     ldEvtCombobox(employee) {
@@ -78,6 +67,7 @@ class Combobox {
                 $(element).parent().find('.user-input').val(""); // empty the input
                 $(element).parent().find('.user-input').focus(); // focus the input
                 $(element).hide(); // Hide the icon
+                $(element).parent().find('.select-container').toggle();// toggle select container
                 // Change the options to default status
                 let options = $(element).parent().find('.option');
                 $(options).each((index, element1) => {
@@ -295,11 +285,12 @@ class Combobox {
             departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
             positionId = positionId != undefined ? positionId.PositionId : ""
             url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1000&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
+            console.log(url)
             $.ajax({
                 url: url,
                 method: "GET"
             }).done((res) => {
-                employee.renderDataEmployee(res.Data);
+                employee.renderDataEmployee(res.Data,res.TotalRecord);
             })
         }, 100)
     }
