@@ -4,7 +4,6 @@
      * **/
     constructor() {
         this.navBarObj = new NavBar();
-        this.inputObj = new Input();
         this.inputClass = new InputClass();
         this.dropdownObj = new DropdownClass();
         this.toggle = new Toggle();

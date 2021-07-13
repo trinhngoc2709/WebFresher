@@ -26,7 +26,7 @@ class ButtonClass {
     }
 
 
-    ldEvtModifyEmployeeButton(toast) {
+    ldEvtModifyEmployeeButton(toast,employee) {
         // Event for edit and delete employee
         let employeeTable = $('.employee-table tbody'); // Employee table
         // Edit event
@@ -81,21 +81,9 @@ class ButtonClass {
         // Event for confirm button
         $(this.confirmConfirmationPopupButton).click((e) => {
             this.toggle.toggleConfirmationPopup(this.popup)
-            $.ajax({
-                url: "http://cukcuk.manhnv.net/v1/Employees/" + employeeId,
-                method: "DELETE",
-                success: (data) => {
-                    if (data) {
-                        // Update employee table
-                        this.refreshButton.trigger('click');
-                        // Check Status Please complete toast message
-                        if (data) {
-                            ToastMessage.createToastMessage("Xóa thành công", "success")
-                        }
-                    }
-
-                }
-            })
+            employee.removeData("http://cukcuk.manhnv.net/v1/Employees/" + employeeId)
+            // Update employee table
+            this.refreshButton.trigger('click');
         })
     }
     /**
@@ -105,7 +93,7 @@ class ButtonClass {
     ldEvtSaveButton(employee) {
         // Event for save information of new employee
         $(this.employeeSaveButton).click(() => {
-            if (employee.checkValidInputs(employee) || true) {
+            if (employee.checkValidInputs(employee)) {
                 let objEmployee = {}
                 let inputUpload = $('.employee-detail input').filter((index, element) => $(element).attr("fieldname") != undefined)
                 // Saving the data of new employee
@@ -202,9 +190,14 @@ class ButtonClass {
             } else {
                 $('.popup-layout').slideToggle(300, "linear");
                 $('.popup-list').slideToggle(300, "linear");
+                ToastMessage.createToastMessage("Dữ liệu nhập sai","warning")
             }
         })
     }
+    /**
+     * Event for Refresh button
+     * @param {Employee} employee 
+     */
     ldEvtRefreshButton(employee) {
         // Event for refresh
         $(this.refreshButton).click(() => {
@@ -214,7 +207,7 @@ class ButtonClass {
             let positionId = $('.content .select-custom.position .option.active-option').data("positionInformation")
             departmentId = departmentId != undefined ? departmentId.DepartmentId : ""
             positionId = positionId != undefined ? positionId.PositionId : ""
-            url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=1&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
+            url = `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=0&employeeCode=NV&departmentId=${departmentId}&positionId=${positionId} `
             $.ajax({
                 url: url,
                 method: "GET"
@@ -227,7 +220,11 @@ class ButtonClass {
             })
         })
     }
-    ldEvtOpenButton(input,toast) {
+    /**
+     * 
+     * Event for Open form
+     */
+    ldEvtOpenButton() {
         // Show the employee detail event
         $(this.openEmployeeFormButton).click(() => {
             this.toggle.toggleEmployeeForm(this.combobox, this.input);
@@ -249,6 +246,9 @@ class ButtonClass {
         })
 
     }
+    /**
+     * Event for close PopUp or Form
+     */
     ldEvtCloseButton() {
         //Blur Background click event except dialog 
         $(this.layoutBlur).click(() => {
@@ -275,6 +275,9 @@ class ButtonClass {
         })
 
     }
+    /**
+     * Event for toggle Navbar
+     */
     ldEvtResizeButton() {
         // Event for resize button 
         let btnResize = $('.navbar .navbar-content .btn-resize');

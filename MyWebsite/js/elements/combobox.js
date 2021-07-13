@@ -18,23 +18,15 @@ class Combobox {
     // Initialize for select custom of employee detail page
     initCustomizedSelect(input) {
         // Clear the user's input and initialize the value for select 
-        let inputs = input.comboboxInputs
-        let userInputs = input.employeeDetailUserInputs
-        $(userInputs).each((index, element) => {
-            $(element).val("")
-        })
-        // $(inputs[0]).val("Nam");
-        // $(inputs[1]).val("Phòng Đào tạo")
-        // $(inputs[2]).val("Phòng Marketting")
-        // $(inputs[3]).val("Đang làm việc")
-
-        let datePickerField = input.datePickerField
-        datePickerField.each((index, element) => {
-            $(element).val("")
-        })
-        
+        let inputs = input.employeeDetailInputs
+        $(inputs).each((index,element) => {
+            $(element).val("");
+        })  
     }
-
+    /**
+     * Event for Combobox
+     * @param {Employee} employee 
+     */
     ldEvtCombobox(employee) {
         var self = this;
         let check = true;
@@ -269,13 +261,18 @@ class Combobox {
         }
     }
     /**
-     * 
+     * Event for dropdown in searching section
+     * @param {Employee} employee 
      */
     lvEvtDropDownChoosing(employee) {
         $('.content .select-custom.department').add($('.content .select-custom.position')).on('click keydown', '.option', (e) => {
             this.filterData(employee);
         })
     }
+    /**
+     * Event for filter Data
+     * @param {Employee} employee 
+     */
     filterData(employee) {
         setTimeout(function () {
             let url = "";

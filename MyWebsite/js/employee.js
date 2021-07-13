@@ -203,10 +203,10 @@ class Employee extends BaseJs {
         this.buttonClass.ldEvtOpenButton(this.inputClass, this.toast);
         this.buttonClass.ldEvtSaveButton(this);
         this.buttonClass.ldEvtResizeButton();
-        this.buttonClass.ldEvtModifyEmployeeButton(this.toast);
+        this.buttonClass.ldEvtModifyEmployeeButton(this.toast,this);
         // Events for checking valid input
-        this.inputObj.ldEvtValidIptField(this);
-        this.inputObj.ldEvtImgInput();
+        this.inputClass.ldEvtValidIptField(this);
+        this.inputClass.ldEvtImgInput();
         /* Event for employee tab in homepage */
         this.initCombobox(); // init combobox
         /* Event for dropdown */
@@ -216,6 +216,11 @@ class Employee extends BaseJs {
 
         this.pagingBar.ldEventPaging(this);
     }
+    /**
+     * 
+     * @param {data} res 
+     * @param {int} count 
+     */
     renderDataEmployee(res, count) {
         $('.employee-table tbody').empty();
         let thEmployeeTable = $('.employee-table thead th');
@@ -261,26 +266,28 @@ class Employee extends BaseJs {
     ***/
     loadData() {
         $.ajax({
-            url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=1&employeeCode=NV&departmentId=&positionId=",
+            url: "http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=14&pageNumber=0&employeeCode=NV&departmentId=&positionId=",
             method: "GET",
             success: (data) => {
                 this.renderDataEmployee(data.Data, data.TotalRecord);
+                $('.paging-bar').data("maxPage",data.TotalPage)
                 ToastMessage.createToastMessage("Lấy dữ liệu thành công", "success")
             }
         })
     }
-    /***
-    Class Employee
-    Created by tbngoc (1/7/2021)
-    ***/
-    addData() {
-
-    }
-    /***
-    Class Employee
-    Created by tbngoc (1/7/2021)
-    ***/
-    removeData() {
-
+    /**
+     * Remove Employee record
+     * @param {String} url 
+     */
+    removeData(url) {
+        $.ajax({
+            url: url,
+            method: "DELETE",
+            success: (data) => {
+                if (data) {
+                        ToastMessage.createToastMessage("Xóa thành công", "success")
+                }
+            }
+        })
     }
 }
